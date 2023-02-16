@@ -9,4 +9,5 @@ const contentSchema = new mongoose.Schema({
   videos: [String],
 });
 
+
 module.exports.Content = mongoose.model("Content", contentSchema);
