@@ -5,6 +5,8 @@ const userCtrl = require("../controller/user.controller");
 //get
 router.get("/:id/verify/:token", userCtrl.emailVerify);
 router.get("/get-user/:email", userCtrl.protect, userCtrl.getUser);
+router.get("/get-followers/:email", userCtrl.getFollowers);
+router.get("/get-following/:email", userCtrl.getFollowing);
 
 //post
 router.post("/register", userCtrl.register);

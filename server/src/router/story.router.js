@@ -14,16 +14,8 @@ router.get("/replys/:commentId", commentCtrl.getReplys);
 //post
 router.post("/create-story", userCtrl.protect, storyCtrl.createStory);
 
-router.post(
-  "/create-comment/:storyId",
-  userCtrl.protect,
-  commentCtrl.createComment
-);
+router.post("/create-comment/:storyId",userCtrl.protect, commentCtrl.createComment);
 
-router.post(
-  "/create-reply/:commentId",
-  userCtrl.protect,
-  commentCtrl.createReply
-);
+router.post("/create-reply/:commentId",userCtrl.protect, commentCtrl.createReply);
 
 module.exports = router;

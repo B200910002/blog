@@ -1,8 +1,6 @@
 import React, { Component, createContext } from "react";
 import axios from "axios";
 import {
-  LOGIN_URL,
-  REGISTER_URL,
   CHANGE_PASSWORD_URL,
   USER_URL,
   EDIT_USER_URL,
@@ -13,58 +11,13 @@ import {
   USER_FOLLOWING_URL,
 } from "../constants/config";
 
-export const AuthContext = createContext({});
+export const UserContext = createContext({});
 
-export class AuthProvider extends Component {
+export class UserProvider extends Component {
   constructor(props) {
     super(props);
     this.state = { user: {} };
   }
-
-  componentDidMount = () => {
-    const user = JSON.parse(localStorage.getItem("user"));
-    this.setState({ user: user });
-  };
-
-  login = async (email, password) => {
-    try {
-      const response = await axios.post(LOGIN_URL, {
-        email: email,
-        password: password,
-      });
-      if (response.data.token) {
-        localStorage.setItem("user", JSON.stringify(response.data));
-        window.location.href = "/";
-        return "Login successfully";
-      } else {
-        alert("Please check your email and password");
-      }
-    } catch (e) {
-      return e.response.data;
-    }
-  };
-
-  logout = async () => {
-    localStorage.removeItem("user");
-    window.location.href = "/auth/login";
-    try {
-    } catch (e) {
-      console.log(e.message);
-    }
-  };
-
-  register = async (email, password, repeatPassword) => {
-    try {
-      const response = await axios.post(REGISTER_URL, {
-        email: email,
-        password: password,
-        repeatPassword: repeatPassword,
-      });
-      return response.data;
-    } catch (e) {
-      return e.response.data;
-    }
-  };
 
   changePassword = async (oldPassword, newPassword, repeatNewPassword) => {
     try {
@@ -210,9 +163,6 @@ export class AuthProvider extends Component {
   render() {
     const { user } = this.state;
     const {
-      login,
-      logout,
-      register,
       changePassword,
       getUser,
       getFollowers,
@@ -223,12 +173,9 @@ export class AuthProvider extends Component {
       unfollow,
     } = this;
     return (
-      <AuthContext.Provider
+      <UserContext.Provider
         value={{
           user,
-          login,
-          logout,
-          register,
           changePassword,
           getUser,
           getFollowers,
@@ -240,7 +187,7 @@ export class AuthProvider extends Component {
         }}
       >
         {this.props.children}
-      </AuthContext.Provider>
+      </UserContext.Provider>
     );
   }
 }

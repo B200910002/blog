@@ -157,3 +157,45 @@ exports.editUser = async (req, res, next) => {
     res.status(400).json({ error: e.message });
   }
 };
+
+exports.getFollowers = async (req, res, next) => {
+  try {
+    const { email } = req.params;
+    const user = await User.findOne({ email: email });
+    const followers = await UserGroup.findById(user.followers);
+    const users = [];
+    for (u of followers.users) {
+      const use = await User.findById(u);
+      users.push({
+        email: use.email,
+        name: use.name,
+        photo: use.photo,
+        bio: use.bio,
+      });
+    }
+    res.status(200).json(users);
+  } catch (e) {
+    res.status(400).json({ error: e.message });
+  }
+};
+
+exports.getFollowing = async (req, res, next) => {
+  try {
+    const { email } = req.params;
+    const user = await User.findOne({ email: email });
+    const following = await UserGroup.findById(user.following);
+    const users = [];
+    for (u of following.users) {
+      const use = await User.findById(u);
+      users.push({
+        email: use.email,
+        name: use.name,
+        photo: use.photo,
+        bio: use.bio,
+      });
+    }
+    res.status(200).json(users);
+  } catch (e) {
+    res.status(400).json({ error: e.message });
+  }
+};

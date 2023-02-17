@@ -1,6 +1,6 @@
 export const Containers = {
   main: {
-    padding: "25px 3%",
+    padding: "25px 5%",
   },
 };
 

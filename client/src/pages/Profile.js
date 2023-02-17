@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link, Outlet, useParams } from "react-router-dom";
 import { Row, Col, Image, Button } from "react-bootstrap";
 import { Fonts } from "../constants/styles";
 import { AuthContext } from "../context/AuthContext";
@@ -6,7 +7,11 @@ import ChangePassword from "../components/ChangePassword";
 import EditProfile from "../components/EditProfile";
 import NoPage from "../pages/NoPage";
 
-export default class Profile extends Component {
+function withParams(Component) {
+  return (props) => <Component {...props} params={useParams()} />;
+}
+
+class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -30,7 +35,7 @@ export default class Profile extends Component {
 
   refreshData = async () => {
     const { getUser } = this.context;
-    await getUser().then((data) => {
+    await getUser(this.props.params.email).then((data) => {
       this.setState({
         status: data.status,
         name: data.user.name,
@@ -69,6 +74,7 @@ export default class Profile extends Component {
                 ) : (
                   <></>
                 )}
+                <Outlet />
               </Col>
               <Col sm={3}>
                 {user.email === email && status === 200 ? (
@@ -81,10 +87,14 @@ export default class Profile extends Component {
                     <p style={Fonts.normalDarkBold}>{name}</p>
                     <Row>
                       <Col>
-                        <p>followers: {followers.length}</p>
+                        <Link to="followers">
+                          followers: {followers.length}
+                        </Link>
                       </Col>
                       <Col>
-                        <p>following: {following.length}</p>
+                        <Link to="following">
+                          following: {following.length}
+                        </Link>
                       </Col>
                     </Row>
                     <p style={Fonts.smallDark}>bio: {bio}</p>
@@ -105,16 +115,19 @@ export default class Profile extends Component {
                     <p style={Fonts.normalDarkBold}>{name}</p>
                     <Row>
                       <Col>
-                        <p>followers: {followers.length}</p>
+                        <Link to="followers">
+                          followers: {followers.length}
+                        </Link>
                       </Col>
                       <Col>
-                        <p>following: {following.length}</p>
+                        <Link to="following">
+                          following: {following.length}
+                        </Link>
                       </Col>
                     </Row>
                     <p style={Fonts.smallDark}>bio: {bio}</p>
                     <p style={Fonts.smallDark}>email: {email}</p>
-                    <Button onClick={() => follow(email)}>Follow</Button>
-                    {" "}
+                    <Button onClick={() => follow(email)}>Follow</Button>{" "}
                     <Button onClick={() => unfollow(email)}>Unfollow</Button>
                   </>
                 )}
@@ -128,3 +141,24 @@ export default class Profile extends Component {
     );
   }
 }
+
+// class ProfileConsumer extends Component {
+//   constructor(props) {
+//     super(props);
+//     this.state = {
+//       status: 0,
+//       name: "",
+//       photo: "",
+//       bio: "",
+//       email: "",
+//       followers: [],
+//       following: [],
+//       editModalShow: false,
+//     };
+//   }
+//   render() {
+//     return <></>;
+//   }
+// }
+
+export default withParams(Profile);

@@ -1,4 +1,4 @@
-import { useEffect, useState, Fragment } from "react";
+import { useState, Fragment } from "react";
 import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 import { Button } from "react-bootstrap";
@@ -6,7 +6,7 @@ import { Button } from "react-bootstrap";
 const EmailVerify = () => {
   const [validUrl, setValidUrl] = useState(true);
   const param = useParams();
-  console.log(param)
+  console.log(validUrl);
 
   const verifyEmailUrl = async () => {
     try {
@@ -24,7 +24,9 @@ const EmailVerify = () => {
     <Fragment>
       <div className="container">
         <h1>Click to email verify</h1>
-        <Button onClick={() => verifyEmailUrl()}>Verify</Button>
+        <Link to="auth/login">
+          <Button onClick={() => verifyEmailUrl()}>Verify</Button>
+        </Link>
       </div>
     </Fragment>
   );
