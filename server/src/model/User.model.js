@@ -4,8 +4,8 @@ const bcrypt = require("bcryptjs");
 const validator = require("validator");
 const { UserGroup } = require("./UserGroup.model");
 
-const { Token } = require("../model/token");
-const sendEmail = require("../utils/sendEmail");
+const { Token } = require("../model/token.model");
+const sendEmail = require("../util/sendEmail");
 const crypto = require("crypto");
 
 const userSchema = new mongoose.Schema({

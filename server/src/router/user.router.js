@@ -3,7 +3,7 @@ const router = express.Router();
 const userCtrl = require("../controller/user.controller");
 
 //get
-router.get("/:id/verify/:token", userCtrl.verify)
+router.get("/:id/verify/:token", userCtrl.emailVerify);
 router.get("/get-user/:email", userCtrl.protect, userCtrl.getUser);
 
 //post

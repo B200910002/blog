@@ -1,4 +1,4 @@
-const { Token } = require("../model/token");
+const { Token } = require("../model/token.model");
 const { User } = require("../model/User.model");
 const { UserGroup } = require("../model/UserGroup.model");
 
@@ -12,7 +12,7 @@ exports.register = async (req, res, next) => {
   }
 };
 
-exports.verify = async (req, res, next) => {
+exports.emailVerify = async (req, res, next) => {
   try {
     const { id, token } = req.params;
     const user = await User.findById(id);
