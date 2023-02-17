@@ -8,6 +8,7 @@ import {
   EDIT_USER_URL,
   BASE_URL,
   FOLLOW_URL,
+  UNFOLLOW_URL,
 } from "../constants/config";
 
 export const AuthContext = createContext({});
@@ -158,6 +159,21 @@ export class AuthProvider extends Component {
     }
   };
 
+  unfollow = async (email) => {
+    try {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${
+            JSON.parse(localStorage.getItem("user")).token
+          }`,
+        },
+      };
+      await axios.put(UNFOLLOW_URL + `/${email}`, {}, config);
+    } catch (e) {
+      console.log(e.response.data.error);
+    }
+  };
+
   render() {
     const { user } = this.state;
     const {
@@ -169,6 +185,7 @@ export class AuthProvider extends Component {
       uploadPicture,
       editProfile,
       follow,
+      unfollow
     } = this;
     return (
       <AuthContext.Provider
@@ -182,6 +199,7 @@ export class AuthProvider extends Component {
           uploadPicture,
           editProfile,
           follow,
+          unfollow
         }}
       >
         {this.props.children}
