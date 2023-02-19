@@ -11,6 +11,7 @@ import {
   UNFOLLOW_URL,
   USER_FOLLOWERS_URL,
   USER_FOLLOWING_URL,
+  CONFiG,
 } from "../constants/config";
 
 export const AuthContext = createContext({});
@@ -68,13 +69,6 @@ export class AuthProvider extends Component {
 
   changePassword = async (oldPassword, newPassword, repeatNewPassword) => {
     try {
-      const config = {
-        headers: {
-          Authorization: `Bearer ${
-            JSON.parse(localStorage.getItem("user")).token
-          }`,
-        },
-      };
       const response = await axios.patch(
         CHANGE_PASSWORD_URL,
         {
@@ -82,7 +76,7 @@ export class AuthProvider extends Component {
           newPassword: newPassword,
           repeatNewPassword: repeatNewPassword,
         },
-        config
+        CONFiG
       );
       return response.data;
     } catch (e) {
@@ -93,14 +87,7 @@ export class AuthProvider extends Component {
 
   getUser = async (email) => {
     try {
-      const config = {
-        headers: {
-          Authorization: `Bearer ${
-            JSON.parse(localStorage.getItem("user")).token
-          }`,
-        },
-      };
-      const user = await axios.get(USER_URL + `/${email}`, config);
+      const user = await axios.get(USER_URL + `/${email}`, CONFiG);
       return user.data;
     } catch (e) {
       console.log(e.response.data.error);
@@ -109,14 +96,7 @@ export class AuthProvider extends Component {
 
   getFollowers = async (email) => {
     try {
-      const config = {
-        headers: {
-          Authorization: `Bearer ${
-            JSON.parse(localStorage.getItem("user")).token
-          }`,
-        },
-      };
-      const user = await axios.get(USER_FOLLOWERS_URL + `/${email}`, config);
+      const user = await axios.get(USER_FOLLOWERS_URL + `/${email}`, CONFiG);
       return user.data;
     } catch (e) {
       console.log(e.response.data.error);
@@ -125,14 +105,7 @@ export class AuthProvider extends Component {
 
   getFollowing = async (email) => {
     try {
-      const config = {
-        headers: {
-          Authorization: `Bearer ${
-            JSON.parse(localStorage.getItem("user")).token
-          }`,
-        },
-      };
-      const user = await axios.get(USER_FOLLOWING_URL + `/${email}`, config);
+      const user = await axios.get(USER_FOLLOWING_URL + `/${email}`, CONFiG);
       return user.data;
     } catch (e) {
       console.log(e.response.data.error);
@@ -156,13 +129,6 @@ export class AuthProvider extends Component {
   editProfile = async (user) => {
     console.log("pezda");
     try {
-      const config = {
-        headers: {
-          Authorization: `Bearer ${
-            JSON.parse(localStorage.getItem("user")).token
-          }`,
-        },
-      };
       await axios.put(
         EDIT_USER_URL,
         {
@@ -170,7 +136,7 @@ export class AuthProvider extends Component {
           photo: user.photo,
           bio: user.bio,
         },
-        config
+        CONFiG
       );
     } catch (e) {
       console.log(e.response.data.error);
@@ -179,14 +145,7 @@ export class AuthProvider extends Component {
 
   follow = async (email) => {
     try {
-      const config = {
-        headers: {
-          Authorization: `Bearer ${
-            JSON.parse(localStorage.getItem("user")).token
-          }`,
-        },
-      };
-      await axios.put(FOLLOW_URL + `/${email}`, {}, config);
+      await axios.put(FOLLOW_URL + `/${email}`, {}, CONFiG);
     } catch (e) {
       console.log(e.response.data.error);
     }
@@ -194,14 +153,7 @@ export class AuthProvider extends Component {
 
   unfollow = async (email) => {
     try {
-      const config = {
-        headers: {
-          Authorization: `Bearer ${
-            JSON.parse(localStorage.getItem("user")).token
-          }`,
-        },
-      };
-      await axios.put(UNFOLLOW_URL + `/${email}`, {}, config);
+      await axios.put(UNFOLLOW_URL + `/${email}`, {}, CONFiG);
     } catch (e) {
       console.log(e.response.data.error);
     }

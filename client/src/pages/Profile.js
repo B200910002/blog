@@ -65,7 +65,7 @@ class Profile extends Component {
               bio={bio}
             />
             <Row>
-              <Col sm={9}>
+              <Col sm={9} style={{ overflowY: "scroll", height:"400px" }}>
                 {user.email === email && status === 200 ? (
                   <div style={{ width: "300px" }}>
                     <p style={Fonts.normalDark}>Change password</p>

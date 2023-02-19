@@ -74,7 +74,7 @@ export default class EditProfile extends Component {
 
           <Modal.Footer>
             <Button variant="primary" type="submit" onClick={this.props.onHide}>
-              Edit Profile
+              Save
             </Button>
           </Modal.Footer>
         </Form>
