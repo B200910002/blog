@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 import { Modal, Button, Row, Col, Form, Image } from "react-bootstrap";
 import { Fonts } from "../constants/styles";
-import { AuthContext } from "../context/AuthContext";
+import { UserContext } from "../context/UserContext";
 
 export default class EditProfile extends Component {
   constructor(props) {
     super(props);
     this.state = { name: "", photo: "", bio: "" };
   }
-  static contextType = AuthContext;
+  static contextType = UserContext;
   render() {
     const { uploadPicture, editProfile } = this.context;
     return (

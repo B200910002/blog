@@ -80,3 +80,47 @@ exports.createReply = async (req, res, next) => {
     res.status(400).json({ error: e.message });
   }
 };
+
+exports.editComment = async (req, res, next) => {
+  try {
+    const { commentId } = req.params;
+    const { text, photo } = req.body;
+    const user = req.user;
+    const comment = await Comment.findById(commentId);
+    if (!text && !photo) {
+      throw new Error("Comment must be contain text or photo");
+    }
+    if (comment.user + "" !== user._id + "") {
+      throw new Error("You cannot edit that comment, because you not owner");
+    }
+    comment.text = text ? text : undefined;
+    comment.photo = photo ? photo : undefined;
+    comment.date = Date.now();
+    comment.save();
+    res.status(200).json("Comment edited");
+  } catch (e) {
+    res.status(400).json({ error: e.message });
+  }
+};
+
+exports.deleteComment = async (req, res, next) => {
+  try {
+    const { storyId, commentId } = req.params;
+    const user = req.user;
+    const story = await Story.findById(storyId);
+    const comment = await Comment.findById(commentId);
+    if (!story) throw new Error("Not found to story");
+    if (!comment) throw new Error("That comment already deleted");
+    if (comment.user + "" !== user._id + "")
+      throw new Error("You cannot delete that comment, because you not owner");
+    const index = story.comments.findIndex(function (element) {
+      return element + "" === comment._id + "";
+    });
+    story.comments.splice(index, 1);
+    story.save();
+    comment.remove();
+    res.status(200).json("comment deleted");
+  } catch (e) {
+    res.status(400).json({ error: e.message });
+  }
+};

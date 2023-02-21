@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Fonts } from "../constants/styles";
-import { AuthContext } from "../context/AuthContext";
+import { UserContext } from "../context/UserContext";
 import { useParams } from "react-router-dom";
 import { Button, Col, Image, Row } from "react-bootstrap";
 
@@ -13,7 +13,7 @@ class Followers extends Component {
     super(props);
     this.state = { followers: [] };
   }
-  static contextType = AuthContext;
+  static contextType = UserContext;
   componentDidMount = async () => {
     const { getFollowers } = this.context;
     await getFollowers(this.props.params.email).then((followers) => {

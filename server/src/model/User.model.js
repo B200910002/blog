@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const validator = require("validator");
@@ -8,14 +9,14 @@ const { Token } = require("../model/token.model");
 const sendEmail = require("../util/sendEmail");
 const crypto = require("crypto");
 
-const userSchema = new mongoose.Schema({
+const userSchema = new Schema({
   name: { type: String },
   photo: { type: String },
   bio: { type: String },
   email: { type: String, required: true, uniqued: true },
   password: { type: String, required: true },
-  followers: { type: Object, required: true },
-  following: { type: Object, required: true },
+  followers: { type: Schema.Types.ObjectId, required: true },
+  following: { type: Schema.Types.ObjectId, required: true },
   verified: { type: Boolean, default: false },
 });
 

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Form, FormGroup, FormControl, Button } from "react-bootstrap";
-import { AuthContext } from "../context/AuthContext";
+import { UserContext } from "../context/UserContext";
 
 export default class ChangePassword extends Component {
   constructor(props) {
@@ -12,7 +12,7 @@ export default class ChangePassword extends Component {
       response: "",
     };
   }
-  static contextType = AuthContext;
+  static contextType = UserContext;
   handleChange = (event) => {
     this.setState({
       [event.target.name]: event.target.value,

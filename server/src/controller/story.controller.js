@@ -4,8 +4,8 @@ const { User } = require("../model/User.model");
 
 exports.getStories = async (req, res, next) => {
   try {
-    const { userId } = req.params;
-    const user = await User.findById(userId);
+    const { email } = req.params;
+    const user = await User.findOne({ email: email });
     const stories = await Story.find({ user: user._id });
     res.status(200).json(stories);
   } catch (e) {
@@ -61,7 +61,7 @@ exports.editStory = async (req, res, next) => {
     story.title = title;
     story.contents = contents;
     story.save();
-    res.status(200).json(story);
+    res.status(200).json("Story edited");
   } catch (e) {
     res.status(400).json({ error: e.message });
   }
@@ -76,7 +76,7 @@ exports.deleteStory = async (req, res, next) => {
       throw new Error("You cannot delete that story, because you not owner");
     }
     story.remove();
-    res.status(200).json(story);
+    res.status(200).json("Story deleted");
   } catch (e) {
     res.status(400).json({ error: e.message });
   }

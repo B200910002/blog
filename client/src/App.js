@@ -17,6 +17,7 @@ import Footer from "./components/Footer";
 import EmailVerify from "./components/EmailVerify";
 import Followers from "./components/Followers";
 import Following from "./components/Following";
+import ViewStory from "./components/story/ViewStory";
 
 // const Auth = lazy(() => wait(1000).then(() => import("./pages/Auth")));
 // const Login = lazy(() => wait(1000).then(() => import("./pages/Login")));
@@ -41,7 +42,7 @@ export default function App() {
             <Route index element={<Home />}></Route>
             <Route path="contact" element={<Contact />}></Route>
             <Route path=":email" element={<Profile />}>
-              <Route index element={<></>}/>
+              <Route index element={<ViewStory />}/>
               <Route path="followers" element={<Followers />}/>
               <Route path="following" element={<Following />}/>
             </Route>
