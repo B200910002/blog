@@ -76,7 +76,7 @@ exports.follow = async (req, res, next) => {
     const user1 = req.user;
     const user2 = await User.findOne({ email: req.params.email });
     const response = await User.follow(user1, user2);
-    res.status(200).json({ user1: user1, user2: user2 });
+    res.status(200).json("followed");
   } catch (e) {
     res.status(400).json({ error: e.message });
   }
@@ -87,7 +87,7 @@ exports.unFollow = async (req, res, next) => {
     const user1 = req.user;
     const user2 = await User.findOne({ email: req.params.email });
     const response = await User.unfollow(user1, user2);
-    res.status(200).json("unfollow");
+    res.status(200).json("unfollowed");
   } catch (e) {
     res.status(400).json({ error: e.message });
   }
@@ -164,7 +164,7 @@ exports.getFollowers = async (req, res, next) => {
     const user = await User.findOne({ email: email });
     const followers = await UserGroup.findById(user.followers);
     const users = [];
-    for (u of followers.users) {
+    for (let u of followers.users) {
       const use = await User.findById(u);
       users.push({
         email: use.email,
@@ -185,7 +185,7 @@ exports.getFollowing = async (req, res, next) => {
     const user = await User.findOne({ email: email });
     const following = await UserGroup.findById(user.following);
     const users = [];
-    for (u of following.users) {
+    for (let u of following.users) {
       const use = await User.findById(u);
       users.push({
         email: use.email,

@@ -43,7 +43,7 @@ class ProfileConsumer extends Component {
   };
 
   render() {
-    const { user, follow, unfollow } = this.context;
+    const { follow, unfollow } = this.context;
     const { status, name, photo, bio, email, followers, following } =
       this.context;
     let editModalClose = () => this.setState({ editModalShow: false });
@@ -60,8 +60,8 @@ class ProfileConsumer extends Component {
                 bio={bio}
               />
               <Row>
-                <Col sm={9} style={{ overflowY: "scroll", height: "400px" }}>
-                  {user.email === email && status === 200 ? (
+                <Col sm={8} style={{ overflowY: "scroll" }}>
+                  {status === 200 ? (
                     <div style={{ width: "300px" }}>
                       <p style={Fonts.normalDark}>Change password</p>
                       <ChangePassword />
@@ -71,7 +71,7 @@ class ProfileConsumer extends Component {
                   )}
                   <Outlet />
                 </Col>
-                <Col sm={3}>
+                <Col sm={4}>
                   {status === 200 ? (
                     <>
                       <Image

@@ -131,30 +131,34 @@ userSchema.statics.changePassword = async function (
 
 userSchema.statics.follow = async function (user1, user2) {
   const following = await UserGroup.findById(user1.following);
+  const exists = await following.users.find(function (element) {
+    return element + "" === user2._id + "";
+  });
+  if (exists) {
+    return
+  }
   following.users.push(user2._id);
-  following.save();
+  await following.save();
 
   const followers = await UserGroup.findById(user2.followers);
   followers.users.push(user1._id);
-  followers.save();
+  await followers.save();
 };
 
 userSchema.statics.unfollow = async function (user1, user2) {
   const following = await UserGroup.findById(user1.following);
-  for (i in following.users) {
-    if (following.users[i] + "" == user2._id + "") {
-      following.users.splice(i, 1);
-      await following.save();
-    }
-  }
+  const index = await following.users.findIndex(function (element) {
+    return element + "" === user2._id + "";
+  });
+  following.users.splice(index, 1);
+  await following.save();
 
   const followers = await UserGroup.findById(user2.followers);
-  for (i in followers.users) {
-    if (followers.users[i] + "" == user1._id + "") {
-      followers.users.splice(i, 1);
-      await followers.save();
-    }
-  }
+  const index2 = await followers.users.findIndex(function (element) {
+    return element + "" === user1._id + "";
+  });
+  followers.users.splice(index2, 1);
+  await followers.save();
 };
 
 module.exports.User = mongoose.model("User", userSchema);

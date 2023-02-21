@@ -117,8 +117,8 @@ exports.deleteComment = async (req, res, next) => {
       return element + "" === comment._id + "";
     });
     story.comments.splice(index, 1);
-    story.save();
-    comment.remove();
+    await story.save();
+    await comment.remove();
     res.status(200).json("comment deleted");
   } catch (e) {
     res.status(400).json({ error: e.message });

@@ -10,12 +10,12 @@ const storySchema = new Schema({
     type: String,
     required: true,
   },
-  contents: [Schema.Types.ObjectId],
+  contents: [Object],
   date: {
     type: Date,
     required: true,
   },
-  likes: Schema.Types.ObjectId,
+  likes: Object,
   comments: [Schema.Types.ObjectId],
 });
 

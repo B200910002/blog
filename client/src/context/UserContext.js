@@ -11,7 +11,6 @@ import {
   USER_FOLLOWING_URL,
   CONFiG,
 } from "../constants/config";
-import { AuthContext } from "./AuthContext";
 
 export const UserContext = createContext({});
 
@@ -19,7 +18,6 @@ export class UserProvider extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: {},
       status: 0,
       name: "",
       photo: "",
@@ -29,8 +27,6 @@ export class UserProvider extends Component {
       following: [],
     };
   }
-
-  static contextType = AuthContext;
 
   changePassword = async (oldPassword, newPassword, repeatNewPassword) => {
     try {
@@ -132,8 +128,16 @@ export class UserProvider extends Component {
     }
   };
 
+  getStories = async (email) => {
+    try {
+      const response = await axios.get(BASE_URL + `/story/get-all/${email}`);
+      return response.data;
+    } catch (e) {
+      console.log(e.response.data.error);
+    }
+  };
+
   render() {
-    const { user } = this.context;
     const { status, name, photo, bio, email, followers, following } =
       this.state;
     const {
@@ -145,11 +149,11 @@ export class UserProvider extends Component {
       editProfile,
       follow,
       unfollow,
+      getStories,
     } = this;
     return (
       <UserContext.Provider
         value={{
-          user,
           status,
           name,
           photo,
@@ -165,6 +169,7 @@ export class UserProvider extends Component {
           editProfile,
           follow,
           unfollow,
+          getStories,
         }}
       >
         {this.props.children}

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Fonts } from "../constants/styles";
 import { UserContext } from "../context/UserContext";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Button, Col, Image, Row } from "react-bootstrap";
 
 function withParams(Component) {
@@ -24,23 +24,25 @@ class Following extends Component {
     const { following } = this.state;
     return (
       <>
-        <p style={Fonts.largeDark}>Following</p>
+        <p style={Fonts.largeDarkBold}>Following</p>
         {following.map((follower, index) => (
-          <Row key={index}>
-            <Col sm={1}>
-              <Image
-                src={follower.photo}
-                style={{ width: "50px", borderRadius: "25px" }}
-              />
-            </Col>
-            <Col sm={6}>
-              <p style={{ margin: "0" }}>{follower.name}</p>
-              <p style={Fonts.smallGray}>{follower.bio}</p>
-            </Col>
-            <Col>
-              <Button>Unfollow</Button>
-            </Col>
-          </Row>
+          <Link key={index} to={"/" + follower.email}>
+            <Row>
+              <Col sm={1}>
+                <Image
+                  src={follower.photo}
+                  style={{ width: "50px", borderRadius: "25px" }}
+                />
+              </Col>
+              <Col sm={6}>
+                <p style={{ margin: "0" }}>{follower.name}</p>
+                <p style={Fonts.smallGray}>{follower.bio}</p>
+              </Col>
+              <Col>
+                <Button>Unfollow</Button>
+              </Col>
+            </Row>
+          </Link>
         ))}
       </>
     );
