@@ -124,8 +124,12 @@ exports.getUser = async (req, res, next) => {
     }
     const followers = await UserGroup.findById(user.followers);
     const following = await UserGroup.findById(user.following);
+    const isFollowed = await followers.users.find(function (element) {
+      return element + "" === me._id + "";
+    });
     res.status(200).json({
       status: status,
+      isFollowed: isFollowed ? true : false,
       user: {
         name: user.name,
         photo: user.photo,
@@ -160,17 +164,23 @@ exports.editUser = async (req, res, next) => {
 
 exports.getFollowers = async (req, res, next) => {
   try {
+    const me = req.user;
     const { email } = req.params;
     const user = await User.findOne({ email: email });
     const followers = await UserGroup.findById(user.followers);
+    const myFollowing = await UserGroup.findById(me.following);
     const users = [];
     for (let u of followers.users) {
       const use = await User.findById(u);
+      const isFollowing = await myFollowing.users.find(function (element) {
+        return element + "" === use._id + "";
+      });
       users.push({
         email: use.email,
         name: use.name,
         photo: use.photo,
         bio: use.bio,
+        isFollowing: isFollowing ? true : false,
       });
     }
     res.status(200).json(users);
@@ -181,17 +191,23 @@ exports.getFollowers = async (req, res, next) => {
 
 exports.getFollowing = async (req, res, next) => {
   try {
+    const me = req.user;
     const { email } = req.params;
     const user = await User.findOne({ email: email });
     const following = await UserGroup.findById(user.following);
+    const myFollowing = await UserGroup.findById(me.following);
     const users = [];
     for (let u of following.users) {
       const use = await User.findById(u);
+      const isFollowing = await myFollowing.users.find(function (element) {
+        return element + "" === use._id + "";
+      });
       users.push({
         email: use.email,
         name: use.name,
         photo: use.photo,
         bio: use.bio,
+        isFollowing: isFollowing ? true : false,
       });
     }
     res.status(200).json(users);

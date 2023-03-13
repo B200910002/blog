@@ -28,7 +28,7 @@ class Profile extends Component {
 class ProfileConsumer extends Component {
   constructor(props) {
     super(props);
-    this.state = { editModalShow: false };
+    this.state = { editModalShow: false, changePassModalShow: false };
   }
   static contextType = UserContext;
 
@@ -44,9 +44,11 @@ class ProfileConsumer extends Component {
 
   render() {
     const { follow, unfollow } = this.context;
-    const { status, name, photo, bio, email, followers, following } =
+    const { status, isFollowed, name, photo, bio, email, followers, following } =
       this.context;
     let editModalClose = () => this.setState({ editModalShow: false });
+    let changePassModalClose = () =>
+      this.setState({ changePassModalShow: false });
     return (
       <UserContext.Consumer>
         {(context) =>
@@ -59,16 +61,16 @@ class ProfileConsumer extends Component {
                 name={name}
                 bio={bio}
               />
+              {status === 200 ? (
+                <ChangePassword
+                  show={this.state.changePassModalShow}
+                  onHide={changePassModalClose}
+                />
+              ) : (
+                <></>
+              )}
               <Row>
                 <Col sm={8} style={{ overflowY: "scroll" }}>
-                  {status === 200 ? (
-                    <div style={{ width: "300px" }}>
-                      <p style={Fonts.normalDark}>Change password</p>
-                      <ChangePassword />
-                    </div>
-                  ) : (
-                    <></>
-                  )}
                   <Outlet />
                 </Col>
                 <Col sm={4}>
@@ -99,6 +101,12 @@ class ProfileConsumer extends Component {
                       >
                         Edit Profile
                       </Button>
+                      {" "}
+                      <Button
+                        onClick={() => this.setState({ changePassModalShow: true })}
+                      >
+                        Change Password
+                      </Button>
                     </>
                   ) : (
                     <>
@@ -122,8 +130,8 @@ class ProfileConsumer extends Component {
                       </Row>
                       <p style={Fonts.smallDark}>bio: {bio}</p>
                       <p style={Fonts.smallDark}>email: {email}</p>
-                      <Button onClick={() => follow(email)}>Follow</Button>{" "}
-                      <Button onClick={() => unfollow(email)}>Unfollow</Button>
+                      {isFollowed?<Button onClick={() => unfollow(email)}>Unfollow</Button>:
+                      <Button onClick={() => follow(email)}>Follow</Button>}
                     </>
                   )}
                 </Col>
