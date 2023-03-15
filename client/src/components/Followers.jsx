@@ -44,12 +44,12 @@ class Followers extends Component {
               </Link>
             </Col>
             <Col sm={6}>
-              <Link to={"/" + follower.email}>
-              {/* <a href={"/"+follower.email}> */}
+              {/* <Link to={"/" + follower.email}> */}
+              <a href={"/"+follower.email}>
                 <p style={{ margin: "0" }}>{follower.name}</p>
                 <p style={Fonts.smallGray}>{follower.bio}</p>
-              {/* </a> */}
-              </Link>
+              </a>
+              {/* </Link> */}
             </Col>
             <Col>
               <AuthContext.Consumer>
