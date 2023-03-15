@@ -45,8 +45,10 @@ class Following extends Component {
             </Col>
             <Col sm={6}>
               <Link to={"/" + follower.email}>
+              {/* <a href={"/"+follower.email}> */}
                 <p style={{ margin: "0" }}>{follower.name}</p>
                 <p style={Fonts.smallGray}>{follower.bio}</p>
+              {/* </a> */}
               </Link>
             </Col>
             <Col>

@@ -124,12 +124,12 @@ exports.getUser = async (req, res, next) => {
     }
     const followers = await UserGroup.findById(user.followers);
     const following = await UserGroup.findById(user.following);
-    const isFollowed = await followers.users.find(function (element) {
+    const isFollowing = await followers.users.find(function (element) {
       return element + "" === me._id + "";
     });
     res.status(200).json({
       status: status,
-      isFollowed: isFollowed ? true : false,
+      isFollowing: isFollowing ? true : false,
       user: {
         name: user.name,
         photo: user.photo,

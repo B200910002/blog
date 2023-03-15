@@ -19,7 +19,7 @@ export class UserProvider extends Component {
     super(props);
     this.state = {
       status: 0,
-      isFollowed: false,
+      isFollowing: false,
       name: "",
       photo: "",
       bio: "",
@@ -52,7 +52,7 @@ export class UserProvider extends Component {
       const response = await axios.get(USER_URL + `/${email}`, CONFiG);
       this.setState({
         status: response.data.status,
-        isFollowed: response.data.isFollowed,
+        isFollowing: response.data.isFollowing,
         name: response.data.user.name,
         photo: response.data.user.photo,
         bio: response.data.user.bio,
@@ -140,7 +140,7 @@ export class UserProvider extends Component {
   };
 
   render() {
-    const { status, isFollowed, name, photo, bio, email, followers, following } =
+    const { status, isFollowing, name, photo, bio, email, followers, following } =
       this.state;
     const {
       changePassword,
@@ -157,7 +157,7 @@ export class UserProvider extends Component {
       <UserContext.Provider
         value={{
           status,
-          isFollowed,
+          isFollowing,
           name,
           photo,
           bio,

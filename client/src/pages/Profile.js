@@ -44,7 +44,7 @@ class ProfileConsumer extends Component {
 
   render() {
     const { follow, unfollow } = this.context;
-    const { status, isFollowed, name, photo, bio, email, followers, following } =
+    const { status, isFollowing, name, photo, bio, email, followers, following } =
       this.context;
     let editModalClose = () => this.setState({ editModalShow: false });
     let changePassModalClose = () =>
@@ -130,7 +130,7 @@ class ProfileConsumer extends Component {
                       </Row>
                       <p style={Fonts.smallDark}>bio: {bio}</p>
                       <p style={Fonts.smallDark}>email: {email}</p>
-                      {isFollowed?<Button onClick={() => unfollow(email)}>Unfollow</Button>:
+                      {isFollowing?<Button onClick={() => unfollow(email)}>Unfollow</Button>:
                       <Button onClick={() => follow(email)}>Follow</Button>}
                     </>
                   )}
