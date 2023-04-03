@@ -1,5 +1,11 @@
 import React, { useContext, Suspense } from "react";
-import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Outlet,
+  Navigate,
+} from "react-router-dom";
 
 import { Containers } from "./constants/styles";
 import { AuthProvider, AuthContext } from "./context/AuthContext";
@@ -42,12 +48,15 @@ export default function App() {
             <Route index element={<Home />}></Route>
             <Route path="contact" element={<Contact />}></Route>
             <Route path=":email" element={<Profile />}>
-              <Route index element={<ViewStory />}/>
-              <Route path="followers" element={<Followers />}/>
-              <Route path="following" element={<Following />}/>
+              <Route index element={<ViewStory />} />
+              <Route path="followers" element={<Followers />} />
+              <Route path="following" element={<Following />} />
             </Route>
           </Route>
-          <Route path="/user/:id/verify/:token" element={<EmailVerify />} ></Route>
+          <Route
+            path="/user/:id/verify/:token"
+            element={<EmailVerify />}
+          ></Route>
           <Route path="*" element={<NoPage />} />
         </Routes>
       </BrowserRouter>
@@ -70,7 +79,7 @@ const Layout = () => {
           <Footer />
         </>
       ) : (
-        <>{(window.location.href = "/auth/login")}</>
+        <Navigate to="/auth/login" />
       )}
     </>
   );

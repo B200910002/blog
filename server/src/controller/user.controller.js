@@ -56,6 +56,16 @@ exports.protect = async (req, res, next) => {
   }
 };
 
+exports.isAuthencated = async (req, res, next) => {
+  try {
+    const user = req.user;
+    if (!user) res.status(401).json({ isAuthenticated: false });
+    else res.status(201).json({ isAuthenticated: true });
+  } catch (e) {
+    res.status(401).json({ error: e.message });
+  }
+};
+
 exports.changePassword = async (req, res, next) => {
   try {
     const { oldPassword, newPassword, repeatNewPassword } = req.body;

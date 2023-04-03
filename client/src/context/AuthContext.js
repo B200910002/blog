@@ -7,12 +7,13 @@ export const AuthContext = createContext({});
 export class AuthProvider extends Component {
   constructor(props) {
     super(props);
-    this.state = { user: {} };
+    this.state = { user: {}, isLoading: true };
   }
 
   componentDidMount = () => {
     const user = JSON.parse(localStorage.getItem("user"));
     this.setState({ user: user });
+    this.setState({ isLoading: false });
   };
 
   login = async (email, password) => {
@@ -56,8 +57,10 @@ export class AuthProvider extends Component {
   };
 
   render() {
-    const { user } = this.state;
+    const { user, isLoading } = this.state;
     const { login, logout, register } = this;
+    if (isLoading) <h1>Loading...</h1>;
+
     return (
       <AuthContext.Provider value={{ user, login, logout, register }}>
         {this.props.children}
