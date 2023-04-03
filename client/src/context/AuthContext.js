@@ -1,18 +1,30 @@
 import React, { Component, createContext } from "react";
 import axios from "axios";
-import { LOGIN_URL, REGISTER_URL } from "../constants/config";
+import {
+  CONFiG,
+  LOGIN_URL,
+  IS_AUTHENCATED_URL,
+  REGISTER_URL,
+} from "../constants/config";
 
 export const AuthContext = createContext({});
 
 export class AuthProvider extends Component {
   constructor(props) {
     super(props);
-    this.state = { user: {}, isLoading: true };
+    this.state = { user: {}, isLoading: true, isAuthenticated: false };
   }
 
-  componentDidMount = () => {
+  componentDidMount = async () => {
     const user = JSON.parse(localStorage.getItem("user"));
     this.setState({ user: user });
+    try {
+      await axios.get(IS_AUTHENCATED_URL, CONFiG).then((response) => {
+        this.setState({ isAuthenticated: response.data.isAuthenticated });
+      });
+    } catch (e) {
+      console.log(e.response.data.error);
+    }
     this.setState({ isLoading: false });
   };
 

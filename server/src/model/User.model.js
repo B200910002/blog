@@ -135,7 +135,7 @@ userSchema.statics.follow = async function (user1, user2) {
     return element + "" === user2._id + "";
   });
   if (exists) {
-    return
+    return;
   }
   following.users.push(user2._id);
   await following.save();
