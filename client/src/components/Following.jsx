@@ -18,9 +18,9 @@ class Following extends Component {
   componentDidMount = () => {
     this.refreshData();
   };
-  // componentDidUpdate = (prevProps, prevState) => {
-  //   this.refreshData();
-  // };
+  componentDidUpdate = (prevProps, prevState) => {
+    this.refreshData();
+  };
   refreshData = () => {
     const { getFollowing } = this.context;
     getFollowing(this.props.params.email).then((following) => {

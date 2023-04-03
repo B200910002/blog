@@ -18,9 +18,9 @@ class Followers extends Component {
   componentDidMount = () => {
     this.refreshData();
   };
-  // componentDidUpdate = () => {
-  //   this.refreshData();
-  // };
+  componentDidUpdate = () => {
+    this.refreshData();
+  };
   refreshData = async () => {
     const { getFollowers } = this.context;
     await getFollowers(this.props.params.email).then((followers) => {

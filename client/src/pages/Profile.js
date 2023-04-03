@@ -44,8 +44,16 @@ class ProfileConsumer extends Component {
 
   render() {
     const { follow, unfollow } = this.context;
-    const { status, isFollowing, name, photo, bio, email, followers, following } =
-      this.context;
+    const {
+      status,
+      isFollowing,
+      name,
+      photo,
+      bio,
+      email,
+      followers,
+      following,
+    } = this.context;
     let editModalClose = () => this.setState({ editModalShow: false });
     let changePassModalClose = () =>
       this.setState({ changePassModalShow: false });
@@ -84,14 +92,18 @@ class ProfileConsumer extends Component {
                       <p style={Fonts.normalDarkBold}>{name}</p>
                       <Row>
                         <Col>
-                          <Link to="followers">
+                          {/* <Link to="followers"> */}
+                          <a href={"/" + email + "/followers"}>
                             followers: {followers.length}
-                          </Link>
+                          </a>
+                          {/* </Link> */}
                         </Col>
                         <Col>
-                          <Link to="following">
+                          {/* <Link to="following"> */}
+                          <a href={"/" + email + "/following"}>
                             following: {following.length}
-                          </Link>
+                          </a>
+                          {/* </Link> */}
                         </Col>
                       </Row>
                       <p style={Fonts.smallDark}>bio: {bio}</p>
@@ -100,10 +112,11 @@ class ProfileConsumer extends Component {
                         onClick={() => this.setState({ editModalShow: true })}
                       >
                         Edit Profile
-                      </Button>
-                      {" "}
+                      </Button>{" "}
                       <Button
-                        onClick={() => this.setState({ changePassModalShow: true })}
+                        onClick={() =>
+                          this.setState({ changePassModalShow: true })
+                        }
                       >
                         Change Password
                       </Button>
@@ -130,8 +143,13 @@ class ProfileConsumer extends Component {
                       </Row>
                       <p style={Fonts.smallDark}>bio: {bio}</p>
                       <p style={Fonts.smallDark}>email: {email}</p>
-                      {isFollowing?<Button onClick={() => unfollow(email)}>Unfollow</Button>:
-                      <Button onClick={() => follow(email)}>Follow</Button>}
+                      {isFollowing ? (
+                        <Button onClick={() => unfollow(email)}>
+                          Unfollow
+                        </Button>
+                      ) : (
+                        <Button onClick={() => follow(email)}>Follow</Button>
+                      )}
                     </>
                   )}
                 </Col>
