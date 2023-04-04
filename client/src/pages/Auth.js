@@ -12,9 +12,7 @@ export default class Auth extends Component {
         {!isAuth ? (
           <div className="login">
             <h2>
-              <Link to="login">Login</Link>
-              {" / "}
-              <Link to="register">Register</Link>
+              <Link to="login">Login</Link><br/>
             </h2>
             <Outlet />
           </div>

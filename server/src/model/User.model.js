@@ -20,28 +20,29 @@ const userSchema = new Schema({
   verified: { type: Boolean, default: false },
 });
 
-userSchema.statics.register = async function (email, password, repeatPassword) {
+userSchema.statics.register = async function (fname, email, password, repeatPassword) {
   if (!email || !password) {
     throw Error("All fields must be filled");
   }
-  if (!validator.isEmail(email)) {
-    throw Error("Email is not valid");
-  }
-  if (await this.findOne({ email })) {
-    throw Error("Email already in register");
-  }
-  if (password !== repeatPassword) {
-    throw Error("Password not matched");
-  }
-  if (!validator.isStrongPassword(password)) {
-    throw Error("Password not strong enough");
-  }
+  // if (!validator.isEmail(email)) {
+  //   throw Error("Email is not valid");
+  // }
+  // if (await this.findOne({ email })) {
+  //   throw Error("Email already in register");
+  // }
+  // if (password !== repeatPassword) {
+  //   throw Error("Password not matched");
+  // }
+  // if (!validator.isStrongPassword(password)) {
+  //   throw Error("Password not strong enough");
+  // }
 
   const followers = await UserGroup.create({});
   const following = await UserGroup.create({});
 
   const newPassword = await bcrypt.hash(password, 10);
   const user = await this.create({
+    name: fname, 
     email: email,
     password: newPassword,
     followers: followers._id,
@@ -72,9 +73,9 @@ userSchema.statics.login = async function (email, password) {
   if (!user) {
     throw Error("Invalid email");
   }
-  if (!user.verified) {
-    throw Error("This email not verified please veryfy email");
-  }
+  // if (!user.verified) {
+  //   throw Error("This email not verified please veryfy email");
+  // }
 
   const isPasswordValid = await bcrypt.compare(password, user.password);
   if (isPasswordValid) {

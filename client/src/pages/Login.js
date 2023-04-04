@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Form, FormGroup, FormControl, Button } from "react-bootstrap";
 import { AuthContext } from "../context/AuthContext";
+import { Link, Outlet } from "react-router-dom";
+
 
 export default class Login extends Component {
   constructor(props) {
@@ -46,6 +48,8 @@ export default class Login extends Component {
             required
           />
         </FormGroup>
+        <br />
+        <Link to="register">Don't have account?</Link>
         <br />
         <Button color="primary" type="submit">
           Login
