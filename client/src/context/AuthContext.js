@@ -1,18 +1,31 @@
 import React, { Component, createContext } from "react";
 import axios from "axios";
-import { LOGIN_URL, REGISTER_URL } from "../constants/config";
+import {
+  CONFiG,
+  LOGIN_URL,
+  IS_AUTHENCATED_URL,
+  REGISTER_URL,
+} from "../constants/config";
 
 export const AuthContext = createContext({});
 
 export class AuthProvider extends Component {
   constructor(props) {
     super(props);
-    this.state = { user: {} };
+    this.state = { user: {}, isLoading: true, isAuthenticated: false };
   }
 
-  componentDidMount = () => {
+  componentDidMount = async () => {
     const user = JSON.parse(localStorage.getItem("user"));
     this.setState({ user: user });
+    try {
+      await axios.get(IS_AUTHENCATED_URL, CONFiG).then((response) => {
+        this.setState({ isAuthenticated: response.data.isAuthenticated });
+      });
+    } catch (e) {
+      console.log(e.response.data.error);
+    }
+    this.setState({ isLoading: false });
   };
 
   login = async (email, password) => {
@@ -58,8 +71,10 @@ export class AuthProvider extends Component {
   };
 
   render() {
-    const { user } = this.state;
+    const { user, isLoading } = this.state;
     const { login, logout, register } = this;
+    if (isLoading) <h1>Loading...</h1>;
+
     return (
       <AuthContext.Provider value={{ user, login, logout, register }}>
         {this.props.children}

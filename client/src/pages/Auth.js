@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, Navigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 
 export default class Auth extends Component {
@@ -17,7 +17,7 @@ export default class Auth extends Component {
             <Outlet />
           </div>
         ) : (
-          <>{(window.location.href = "/")}</>
+          <Navigate to="/" />
         )}
       </>
     );
