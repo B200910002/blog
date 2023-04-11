@@ -10,6 +10,7 @@ import {
   USER_FOLLOWERS_URL,
   USER_FOLLOWING_URL,
   CONFiG,
+  ADD_STORY
 } from "../constants/config";
 
 export const UserContext = createContext({});
@@ -26,6 +27,8 @@ export class UserProvider extends Component {
       email: "",
       followers: [],
       following: [],
+      title: "",
+      contents:[]
     };
   }
 
@@ -46,6 +49,21 @@ export class UserProvider extends Component {
       return e.response.data;
     }
   };
+  addStory = async(title, contents) =>{
+    console.log("dcsdcsdcs");
+    try {
+      await axios.put(
+        ADD_STORY,
+        {
+          title: title,
+          contents: contents,
+        },
+        CONFiG
+      );
+    } catch (e) {
+      console.log(e.response.data.error);
+    }
+  }
 
   getUser = async (email) => {
     try {
@@ -152,6 +170,7 @@ export class UserProvider extends Component {
       follow,
       unfollow,
       getStories,
+      addStory
     } = this;
     return (
       <UserContext.Provider
@@ -173,6 +192,7 @@ export class UserProvider extends Component {
           follow,
           unfollow,
           getStories,
+          addStory
         }}
       >
         {this.props.children}
