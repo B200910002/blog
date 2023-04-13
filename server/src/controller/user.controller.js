@@ -48,6 +48,7 @@ exports.login = async (req, res, next) => {
 exports.protect = async (req, res, next) => {
   try {
     const auth = req.headers.authorization;
+    // console.log(req.headers)
     const token = auth.split(" ")[1];
     req.user = await User.checkToken(token);
     next();

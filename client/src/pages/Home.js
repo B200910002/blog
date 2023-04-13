@@ -3,6 +3,7 @@ import { Fonts } from "../constants/styles";
 import { HomeContext, HomeProvider } from "../context/HomeContext";
 import Story from "../components/Story";
 import { Modal, Button, Row, Col, Form, Image } from "react-bootstrap";
+import { StoryContext, StoryProvider } from "../context/StoryContext";
 
 export default class Home extends Component {
   constructor(props) {
@@ -11,9 +12,9 @@ export default class Home extends Component {
   }
   render() {
     return (
-      <HomeProvider>
+      <StoryProvider>
         <HomeConsumer />
-      </HomeProvider>
+      </StoryProvider>
     );
   }
 }
@@ -23,23 +24,22 @@ class HomeConsumer extends Component {
     super(props);
     this.state = {};
   }
-  static contextType = HomeContext;
+  static contextType = StoryContext;
   render() {
     // const { grade } = this.context;
-    const {photo, title, body} = this.context;
+    const {title, contents} = this.context;
     let addStoryModalClose = () => this.setState({ addStoryModalShow: false });
 
     return (
-      <HomeContext.Consumer>
+      <StoryContext.Consumer>
         {(context) => (
           <>
             <div>
               <Story
                 show={this.state.addStoryModalShow}
                 onHide={addStoryModalClose}
-                photo={photo}
                 title={title}
-                body={body}
+                contents={contents}
               ></Story>
 
               <section>
@@ -53,7 +53,7 @@ class HomeConsumer extends Component {
             </div>
           </>
         )}
-      </HomeContext.Consumer>
+      </StoryContext.Consumer>
     );
   }
 }
