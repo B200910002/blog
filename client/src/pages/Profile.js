@@ -73,18 +73,18 @@ function ProfileConsumer() {
                     <p style={Fonts.normalDarkBold}>{name}</p>
                     <Row>
                       <Col>
-                        {/* <Link to="followers"> */}
-                        <a href={"/" + email + "/followers"}>
+                        <Link to="followers">
+                        {/* <a href={"/" + email + "/followers"}> */}
                           followers: {followers.length}
-                        </a>
-                        {/* </Link> */}
+                        {/* </a> */}
+                        </Link>
                       </Col>
                       <Col>
-                        {/* <Link to="following"> */}
-                        <a href={"/" + email + "/following"}>
+                        <Link to="following">
+                        {/* <a href={"/" + email + "/following"}> */}
                           following: {following.length}
-                        </a>
-                        {/* </Link> */}
+                        {/* </a> */}
+                        </Link>
                       </Col>
                     </Row>
                     <p style={Fonts.smallDark}>bio: {bio}</p>
