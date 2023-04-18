@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { Form, FormGroup, FormControl, Button } from "react-bootstrap";
 import { AuthContext } from "../context/AuthContext";
 import { Link } from "react-router-dom";
+import { ErrorAlert, SuccessAlert } from "../utils/Alert";
 
 export default function Login() {
   const { login } = useContext(AuthContext);
@@ -49,9 +50,9 @@ export default function Login() {
         <br />
         {response ? (
           response.error ? (
-            <div className="alert alert-danger">{response.error}!</div>
+            <ErrorAlert message={response.error + "!"} />
           ) : (
-            <div className="alert alert-success">{response}!</div>
+            <SuccessAlert message={response + "!"} />
           )
         ) : (
           <></>

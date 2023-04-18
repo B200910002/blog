@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import { Form, FormGroup, FormControl, Button, Modal } from "react-bootstrap";
 import { UserContext } from "../context/UserContext";
+import { ErrorAlert, SuccessAlert } from "../utils/Alert";
 
 export default function ChangePassword(props) {
   const { changePassword } = useContext(UserContext);
@@ -70,9 +71,9 @@ export default function ChangePassword(props) {
             <br />
             {response ? (
               response.error ? (
-                <div className="alert alert-danger">{response.error}!</div>
+                <ErrorAlert message={response.error + "!"} />
               ) : (
-                <div className="alert alert-success">{response}!</div>
+                <SuccessAlert message={response + "!"} />
               )
             ) : (
               <></>

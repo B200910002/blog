@@ -28,8 +28,26 @@ export function UserProvider(props) {
   var click = () => (clicked === false ? setClicked(true) : setClicked(false));
 
   useEffect(() => {
+    const getUser = async (email) => {
+      await axios
+        .get(USER_URL + `/${email}`, CONFiG)
+        .then((response) => {
+          setStatus(response.data.status);
+          setIsfollowing(response.data.isFollowing);
+          setName(response.data.user.name);
+          setPhoto(response.data.user.photo);
+          setBio(response.data.user.bio);
+          setEmail(response.data.user.email);
+          setFollower(response.data.user.followers);
+          setFollowing(response.data.user.following);
+        })
+        .catch((e) => {
+          console.log(e.response.data.error);
+        });
+    };
+
     getUser(props.children.props.params.email);
-  }, [clicked]);
+  }, [clicked, props.children.props.params.email]);
 
   const changePassword = async (
     oldPassword,
@@ -50,22 +68,6 @@ export function UserProvider(props) {
     } catch (e) {
       console.log(e.response.data.error);
       return e.response.data;
-    }
-  };
-
-  const getUser = async (email) => {
-    try {
-      const response = await axios.get(USER_URL + `/${email}`, CONFiG);
-      setStatus(response.data.status);
-      setIsfollowing(response.data.isFollowing);
-      setName(response.data.user.name);
-      setPhoto(response.data.user.photo);
-      setBio(response.data.user.bio);
-      setEmail(response.data.user.email);
-      setFollower(response.data.user.followers);
-      setFollowing(response.data.user.following);
-    } catch (e) {
-      console.log(e.response.data.error);
     }
   };
 
@@ -117,19 +119,21 @@ export function UserProvider(props) {
   };
 
   const follow = async (email) => {
-    try {
-      await axios.put(FOLLOW_URL + `/${email}`, {}, CONFiG).then(click);
-    } catch (e) {
-      console.log(e.response.data.error);
-    }
+    await axios
+      .put(FOLLOW_URL + `/${email}`, {}, CONFiG)
+      .then(click)
+      .catch((e) => {
+        console.log(e.response.data.error);
+      });
   };
 
   const unfollow = async (email) => {
-    try {
-      await axios.put(UNFOLLOW_URL + `/${email}`, {}, CONFiG).then(click);
-    } catch (e) {
-      console.log(e.response.data.error);
-    }
+    await axios
+      .put(UNFOLLOW_URL + `/${email}`, {}, CONFiG)
+      .then(click)
+      .catch((e) => {
+        console.log(e.response.data.error);
+      });
   };
 
   const createStory = async (title, contents) => {
@@ -167,7 +171,6 @@ export function UserProvider(props) {
         followers,
         following,
         changePassword,
-        getUser,
         getFollowers,
         getFollowing,
         uploadPicture,
