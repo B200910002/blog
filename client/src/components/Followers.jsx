@@ -11,8 +11,7 @@ function withParams(Component) {
 }
 
 function Followers(props) {
-  const { getFollowers, follow, unfollow, clicked } =
-    useContext(UserContext);
+  const { getFollowers, follow, unfollow, clicked } = useContext(UserContext);
   const [followers, setFollowers] = useState([]);
 
   useEffect(() => {

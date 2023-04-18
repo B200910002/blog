@@ -21,7 +21,8 @@ function Following(props) {
         console.log(following);
       });
     };
-    refreshData().then();
+
+    refreshData();
   }, [clicked]);
 
   return (
