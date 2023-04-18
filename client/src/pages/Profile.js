@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Outlet, useParams } from "react-router-dom";
+import { Link, Outlet, useParams } from "react-router-dom";
 import { Row, Col, Image, Button } from "react-bootstrap";
 import { Fonts } from "../constants/styles";
 import { UserContext, UserProvider } from "../context/UserContext";
@@ -73,18 +73,14 @@ function ProfileConsumer() {
                     <p style={Fonts.normalDarkBold}>{name}</p>
                     <Row>
                       <Col>
-                        {/* <Link to="followers"> */}
-                        <a href={"/" + email + "/followers"}>
+                        <Link to="followers">
                           followers: {followers.length}
-                        </a>
-                        {/* </Link> */}
+                        </Link>
                       </Col>
                       <Col>
-                        {/* <Link to="following"> */}
-                        <a href={"/" + email + "/following"}>
+                        <Link to="following">
                           following: {following.length}
-                        </a>
-                        {/* </Link> */}
+                        </Link>
                       </Col>
                     </Row>
                     <p style={Fonts.smallDark}>bio: {bio}</p>
@@ -106,18 +102,14 @@ function ProfileConsumer() {
                     <p style={Fonts.normalDarkBold}>{name}</p>
                     <Row>
                       <Col>
-                        {/* <Link to="followers"> */}
-                        <a href={"/" + email + "/followers"}>
+                        <Link to="followers">
                           followers: {followers.length}
-                        </a>
-                        {/* </Link> */}
+                        </Link>
                       </Col>
                       <Col>
-                        {/* <Link to="following"> */}
-                        <a href={"/" + email + "/following"}>
+                        <Link to="following">
                           following: {following.length}
-                        </a>
-                        {/* </Link> */}
+                        </Link>
                       </Col>
                     </Row>
                     <p style={Fonts.smallDark}>bio: {bio}</p>

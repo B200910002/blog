@@ -6,6 +6,7 @@ import {
   IS_AUTHENCATED_URL,
   REGISTER_URL,
 } from "../constants/config";
+import Spinner from "react-bootstrap/Spinner";
 
 export const AuthContext = createContext({});
 
@@ -26,9 +27,11 @@ export function AuthProvider(props) {
         .catch((e) => {
           console.log(e.response.data.error);
         });
-      setIsLoading(false);
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 1000);
     };
-    
+
     isAuth();
   }, []);
 
@@ -73,7 +76,14 @@ export function AuthProvider(props) {
     }
   };
 
-  if (isLoading) return <h1>Loading...</h1>;
+  if (isLoading)
+    return (
+      <div className="d-flex justify-content-center align-items-center vh-100">
+        <Spinner animation="border" role="status">
+          <span className="sr-only">Loading...</span>
+        </Spinner>
+      </div>
+    );
 
   return (
     <AuthContext.Provider

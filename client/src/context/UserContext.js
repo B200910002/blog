@@ -24,6 +24,8 @@ export function UserProvider(props) {
   const [email, setEmail] = useState("");
   const [followers, setFollower] = useState([]);
   const [following, setFollowing] = useState([]);
+  const [clicked, setClicked] = useState(false);
+  var click = () => (clicked === false ? setClicked(true) : setClicked(false));
 
   useEffect(() => {
     getUser(props.children.props.params.email);
@@ -116,7 +118,7 @@ export function UserProvider(props) {
 
   const follow = async (email) => {
     try {
-      await axios.put(FOLLOW_URL + `/${email}`, {}, CONFiG);
+      await axios.put(FOLLOW_URL + `/${email}`, {}, CONFiG).then(click);
     } catch (e) {
       console.log(e.response.data.error);
     }
@@ -124,7 +126,7 @@ export function UserProvider(props) {
 
   const unfollow = async (email) => {
     try {
-      await axios.put(UNFOLLOW_URL + `/${email}`, {}, CONFiG);
+      await axios.put(UNFOLLOW_URL + `/${email}`, {}, CONFiG).then(click);
     } catch (e) {
       console.log(e.response.data.error);
     }
@@ -174,6 +176,8 @@ export function UserProvider(props) {
         unfollow,
         getStories,
         createStory,
+        clicked,
+        click,
       }}
     >
       {props.children}
