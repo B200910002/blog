@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 import { Fonts } from "../constants/styles";
 import { StoryContext } from "../context/StoryContext";
-import { UserContext } from "../context/UserContext";
+// import { UserContext } from "../context/UserContext";
 
 export default class Story extends Component {
   constructor(props) {
