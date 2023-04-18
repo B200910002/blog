@@ -10,9 +10,9 @@ import {
 import { Containers } from "./constants/styles";
 import { AuthProvider, AuthContext } from "./context/AuthContext";
 
-import Auth from "./pages/Auth";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
+import Auth from "./authentication/Auth";
+import Login from "./authentication/Login";
+import Register from "./authentication/Register";
 import Profile from "./pages/Profile";
 import Home from "./pages/Home";
 import Contact from "./pages/Contact";
@@ -67,10 +67,10 @@ export default function App() {
 }
 
 const Layout = () => {
-  const { user } = useContext(AuthContext);
+  const { user, isAuthenticated } = useContext(AuthContext);
   return (
     <>
-      {user ? (
+      {user && isAuthenticated ? (
         <>
           <Header />
           <div style={Containers.main}>

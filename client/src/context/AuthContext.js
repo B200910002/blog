@@ -1,4 +1,4 @@
-import React, { Component, createContext } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import axios from "axios";
 import {
   CONFiG,
@@ -9,26 +9,30 @@ import {
 
 export const AuthContext = createContext({});
 
-export class AuthProvider extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { user: {}, isLoading: true, isAuthenticated: false };
-  }
+export function AuthProvider(props) {
+  const [user, setUser] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  componentDidMount = async () => {
-    const user = JSON.parse(localStorage.getItem("user"));
-    this.setState({ user: user });
-    try {
-      await axios.get(IS_AUTHENCATED_URL, CONFiG).then((response) => {
-        this.setState({ isAuthenticated: response.data.isAuthenticated });
-      });
-    } catch (e) {
-      console.log(e.response.data.error);
-    }
-    this.setState({ isLoading: false });
-  };
+  useEffect(() => {
+    const isAuth = async () => {
+      const user = JSON.parse(localStorage.getItem("user"));
+      setUser(user);
+      await axios
+        .get(IS_AUTHENCATED_URL, CONFiG)
+        .then((response) => {
+          setIsAuthenticated(response.data.isAuthenticated);
+        })
+        .catch((e) => {
+          console.log(e.response.data.error);
+        });
+      setIsLoading(false);
+    };
+    
+    isAuth();
+  }, []);
 
-  login = async (email, password) => {
+  const login = async (email, password) => {
     try {
       const response = await axios.post(LOGIN_URL, {
         email: email,
@@ -46,7 +50,7 @@ export class AuthProvider extends Component {
     }
   };
 
-  logout = async () => {
+  const logout = async () => {
     localStorage.removeItem("user");
     window.location.href = "/auth/login";
     try {
@@ -55,7 +59,7 @@ export class AuthProvider extends Component {
     }
   };
 
-  register = async (fname, email, password, repeatPassword) => {
+  const register = async (fname, email, password, repeatPassword) => {
     try {
       const response = await axios.post(REGISTER_URL, {
         name: fname,
@@ -63,22 +67,19 @@ export class AuthProvider extends Component {
         password: password,
         repeatPassword: repeatPassword,
       });
-      console.log("name", fname, email);
       return response.data;
     } catch (e) {
       return e.response.data;
     }
   };
 
-  render() {
-    const { user, isLoading } = this.state;
-    const { login, logout, register } = this;
-    if (isLoading) <h1>Loading...</h1>;
+  if (isLoading) return <h1>Loading...</h1>;
 
-    return (
-      <AuthContext.Provider value={{ user, login, logout, register }}>
-        {this.props.children}
-      </AuthContext.Provider>
-    );
-  }
+  return (
+    <AuthContext.Provider
+      value={{ user, isAuthenticated, login, logout, register }}
+    >
+      {props.children}
+    </AuthContext.Provider>
+  );
 }
