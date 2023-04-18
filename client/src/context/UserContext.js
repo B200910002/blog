@@ -10,6 +10,7 @@ import {
   USER_FOLLOWERS_URL,
   USER_FOLLOWING_URL,
   CONFiG,
+  ADD_STORY
 } from "../constants/config";
 
 export const UserContext = createContext({});
@@ -26,6 +27,8 @@ export class UserProvider extends Component {
       email: "",
       followers: [],
       following: [],
+      title: "",
+      contents: []
     };
   }
 
@@ -130,6 +133,20 @@ export class UserProvider extends Component {
     }
   };
 
+  createStory = async (title, contents) => {
+    console.log("story", title, contents);
+    try {
+      const response = await axios.post(ADD_STORY, {
+        title: title,
+        contents: contents,
+      });
+      console.log("story", title, contents);
+      return response.data;
+    } catch (e) {
+      return e.response.data;
+    }
+  };
+  
   getStories = async (email) => {
     try {
       const response = await axios.get(BASE_URL + `/story/get-all/${email}`);
@@ -140,7 +157,7 @@ export class UserProvider extends Component {
   };
 
   render() {
-    const { status, isFollowing, name, photo, bio, email, followers, following } =
+    const { status, isFollowing, name, photo, bio, email, followers, following, title, contents } =
       this.state;
     const {
       changePassword,
@@ -152,6 +169,7 @@ export class UserProvider extends Component {
       follow,
       unfollow,
       getStories,
+      createStory
     } = this;
     return (
       <UserContext.Provider
@@ -164,6 +182,8 @@ export class UserProvider extends Component {
           email,
           followers,
           following,
+          title,
+          contents,
           changePassword,
           getUser,
           getFollowers,
@@ -173,6 +193,7 @@ export class UserProvider extends Component {
           follow,
           unfollow,
           getStories,
+          createStory
         }}
       >
         {this.props.children}

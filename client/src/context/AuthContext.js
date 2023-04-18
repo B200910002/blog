@@ -55,13 +55,15 @@ export class AuthProvider extends Component {
     }
   };
 
-  register = async (email, password, repeatPassword) => {
+  register = async (fname, email, password, repeatPassword) => {
     try {
       const response = await axios.post(REGISTER_URL, {
+        name: fname,
         email: email,
         password: password,
         repeatPassword: repeatPassword,
       });
+      console.log("name", fname, email);
       return response.data;
     } catch (e) {
       return e.response.data;

@@ -19,4 +19,22 @@ const storySchema = new Schema({
   comments: [Schema.Types.ObjectId],
 });
 
+storySchema.statics.createStory = async function (
+  user,
+  title,
+  contents,
+  date,
+  likes
+) {
+  const story = await this.create({
+    user: user,
+    title: title, 
+    contents: contents,
+    date: date,
+    likes: likes
+  });
+
+  return story;
+};
+
 module.exports.Story = mongoose.model("story", storySchema);

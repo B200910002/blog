@@ -12,6 +12,8 @@ export const EDIT_USER_URL = `${BASE_URL}/user/edit-user`;
 export const FOLLOW_URL = `${BASE_URL}/user/follow`;
 export const UNFOLLOW_URL = `${BASE_URL}/user/unfollow`;
 
+export const ADD_STORY = `${BASE_URL}/story/create-story`;
+
 export const CHANGE_PASSWORD_URL = `${BASE_URL}/user/change-password`;
 
 export const GRADE_URL = `${BASE_URL}/grade/`;

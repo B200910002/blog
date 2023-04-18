@@ -43,6 +43,8 @@ export default function App() {
           <Route path="/auth" element={<Auth />}>
             <Route path="login" element={<Login />} />
             <Route path="register" element={<Register />} />
+            <Route path="login/register" element={<Register />} />
+            <Route path="login/register/login" element={<Login />} />
           </Route>
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />}></Route>

@@ -21,6 +21,7 @@ export default class ChangePassword extends Component {
   handleSubmit = async (event) => {
     event.preventDefault();
     const { changePassword } = this.context;
+    console.log(this.context)
     const response = await changePassword(
       this.state.oldPassword,
       this.state.newPassword,

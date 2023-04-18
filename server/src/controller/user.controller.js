@@ -4,8 +4,8 @@ const { UserGroup } = require("../model/UserGroup.model");
 
 exports.register = async (req, res, next) => {
   try {
-    const { email, password, repeatPassword } = req.body;
-    const response = await User.register(email, password, repeatPassword);
+    const { name , email, password, repeatPassword } = req.body;
+    const response = await User.register(name, email, password, repeatPassword);
     res.status(201).json("An Email sent to your account please verify");
   } catch (e) {
     res.status(401).json({ error: e.message });
@@ -48,6 +48,7 @@ exports.login = async (req, res, next) => {
 exports.protect = async (req, res, next) => {
   try {
     const auth = req.headers.authorization;
+    // console.log(req.headers)
     const token = auth.split(" ")[1];
     req.user = await User.checkToken(token);
     next();

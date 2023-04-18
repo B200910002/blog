@@ -35,6 +35,7 @@ exports.getByIdStory = async (req, res, next) => {
 };
 
 exports.createStory = async (req, res, next) => {
+  // console.log(req.user)
   try {
     const { title, contents } = req.body;
     const conts = [];

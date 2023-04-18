@@ -1,11 +1,18 @@
 import React, { Component } from "react";
 import { Form, FormGroup, FormControl, Button } from "react-bootstrap";
 import { AuthContext } from "../context/AuthContext";
+import { Link, Outlet } from "react-router-dom";
 
 export default class Register extends Component {
   constructor(props) {
     super(props);
-    this.state = { email: "", password: "", repeatPassword: "", response: "" };
+    this.state = {
+      fname: "",
+      email: "",
+      password: "",
+      repeatPassword: "",
+      response: "",
+    };
   }
   static contextType = AuthContext;
   handleChange = (event) => {
@@ -18,16 +25,30 @@ export default class Register extends Component {
     event.preventDefault();
     const { register } = this.context;
     const response = await register(
+      this.state.fname,
       this.state.email,
       this.state.password,
       this.state.repeatPassword
     );
     this.setState({ response: response });
+    console.log(this.state.fname);
   };
   render() {
     const { response } = this.state;
     return (
       <Form onSubmit={this.handleSubmit}>
+        <h2>Register</h2>
+        <FormGroup>
+          <Form.Label>Name:</Form.Label>
+          <FormControl
+            type="name"
+            id="fname"
+            name="fname"
+            value={this.state.name}
+            onChange={this.handleChange}
+            required
+          />
+        </FormGroup>
         <FormGroup>
           <Form.Label>Email:</Form.Label>
           <FormControl
