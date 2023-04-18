@@ -25,9 +25,11 @@ export default class Header extends Component {
           </Navbar>
           <Navbar className="p-0">
             <NavItem>
-              <Link className="nav-link" to={user.email}>
+              {/* <Link className="nav-link" to={user.email}> */}
+              <a className="nav-link" href={"/" + user.email}>
                 {user.email}
-              </Link>
+              </a>
+              {/* </Link> */}
             </NavItem>
             <NavItem>
               <Link onClick={() => logout()}>Logout</Link>

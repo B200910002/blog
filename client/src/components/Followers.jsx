@@ -19,7 +19,7 @@ function Followers(props) {
         setFollowers(followers);
       });
     };
-    
+
     refreshData();
   });
 

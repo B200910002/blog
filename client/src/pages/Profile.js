@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Link, Outlet, useParams } from "react-router-dom";
+import { Outlet, useParams } from "react-router-dom";
 import { Row, Col, Image, Button } from "react-bootstrap";
 import { Fonts } from "../constants/styles";
 import { UserContext, UserProvider } from "../context/UserContext";
@@ -106,14 +106,18 @@ function ProfileConsumer() {
                     <p style={Fonts.normalDarkBold}>{name}</p>
                     <Row>
                       <Col>
-                        <Link to="followers">
+                        {/* <Link to="followers"> */}
+                        <a href={"/" + email + "/followers"}>
                           followers: {followers.length}
-                        </Link>
+                        </a>
+                        {/* </Link> */}
                       </Col>
                       <Col>
-                        <Link to="following">
+                        {/* <Link to="following"> */}
+                        <a href={"/" + email + "/following"}>
                           following: {following.length}
-                        </Link>
+                        </a>
+                        {/* </Link> */}
                       </Col>
                     </Row>
                     <p style={Fonts.smallDark}>bio: {bio}</p>
