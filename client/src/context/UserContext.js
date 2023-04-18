@@ -29,7 +29,7 @@ export function UserProvider(props) {
 
   useEffect(() => {
     getUser(props.children.props.params.email);
-  });
+  }, [clicked]);
 
   const changePassword = async (
     oldPassword,

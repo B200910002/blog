@@ -18,7 +18,6 @@ function Followers(props) {
     const refreshData = async () => {
       await getFollowers(props.params.email).then((followers) => {
         setFollowers(followers);
-        console.log(followers);
       });
     };
 
