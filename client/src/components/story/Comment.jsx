@@ -31,7 +31,9 @@ export default function Comment(props) {
     >
       <Form onSubmit={handleSubmit}>
         <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-vcenter">Comments</Modal.Title>
+          <Modal.Title id="contained-modal-title-vcenter">
+            Comments {comments.length}
+          </Modal.Title>
         </Modal.Header>
         <Row className="container">
           <Col style={{ overflowY: "scroll", height: "300px" }}>
@@ -68,23 +70,23 @@ export default function Comment(props) {
           </Col>
         </Row>
 
-        <Modal.Body style={Fonts.smallGray}>
-          <Form.Group controlId="title">
-            <Form.Label>Comment</Form.Label>
-            <Form.Control
-              type="text"
-              name="text"
-              placeholder="add comment"
-              value={text}
-              onChange={(event) => setText(event.target.value)}
-            />
-          </Form.Group>
-        </Modal.Body>
-
         <Modal.Footer>
-          <Button variant="primary" type="submit" onClick={props.onHide}>
-            Comment
-          </Button>
+          <Row>
+            <Col sm={8}>
+              <Form.Control
+                type="text"
+                name="text"
+                placeholder="add comment"
+                value={text}
+                onChange={(event) => setText(event.target.value)}
+              />
+            </Col>
+            <Col sm={4}>
+              <Button variant="primary" type="submit" onClick={props.onHide}>
+                Comment
+              </Button>
+            </Col>
+          </Row>
         </Modal.Footer>
       </Form>
     </Modal>

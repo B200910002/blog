@@ -6,6 +6,7 @@ import { UserContext, UserProvider } from "../context/UserContext";
 import ChangePassword from "../components/ChangePassword";
 import EditProfile from "../components/EditProfile";
 import NoPage from "../pages/NoPage";
+import Story from "../components/Story";
 
 function withParams(Component) {
   return (props) => <Component {...props} params={useParams()} />;
@@ -37,12 +38,15 @@ function ProfileConsumer() {
   const [changePassModalShow, setChangePassModalShow] = useState(false);
   let editModalClose = () => setEditModalShow(false);
   let changePassModalClose = () => setChangePassModalShow(false);
+  const [addStoryModalShow, setAddStoryModalShow] = useState(false);
+  let addStoryModalClose = () => setAddStoryModalShow(false);
 
   return (
     <UserContext.Consumer>
       {(context) =>
         status ? (
           <div>
+            <Story show={addStoryModalShow} onHide={addStoryModalClose}></Story>
             <EditProfile
               show={editModalShow}
               onHide={editModalClose}
@@ -90,6 +94,9 @@ function ProfileConsumer() {
                     </Button>{" "}
                     <Button onClick={() => setChangePassModalShow(true)}>
                       Change Password
+                    </Button>{" "}
+                    <Button onClick={() => setAddStoryModalShow(true)}>
+                      Add story
                     </Button>
                   </>
                 ) : (

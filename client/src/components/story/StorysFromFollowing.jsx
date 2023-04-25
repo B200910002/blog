@@ -5,9 +5,9 @@ import { Image, Row, Col } from "react-bootstrap";
 import Comment from "./Comment";
 
 export default function StoryFromFollowing() {
-  const { getStoriesFromFollowing, like } = useContext(StoryContext);
+  const { getStoriesFromFollowing, like, selectStory, setSelectStory } =
+    useContext(StoryContext);
   const [stories, setStories] = useState([]);
-  const [selectStory, setSelectStory] = useState({});
   const [commentModalShow, setCommentModalShow] = useState(false);
   let commentModalClose = () => setCommentModalShow(false);
   useEffect(() => {

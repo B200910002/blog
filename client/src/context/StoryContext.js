@@ -1,4 +1,4 @@
-import React, { createContext } from "react";
+import React, { createContext, useState } from "react";
 import axios from "axios";
 import {
   ADD_STORY,
@@ -10,6 +10,7 @@ import {
 export const StoryContext = createContext({});
 
 export function StoryProvider(props) {
+  const [selectStory, setSelectStory] = useState({});
   const createStory = async (title, contents) => {
     try {
       const response = await axios.post(
@@ -69,6 +70,8 @@ export function StoryProvider(props) {
   return (
     <StoryContext.Provider
       value={{
+        selectStory,
+        setSelectStory,
         createStory,
         getStoriesFromFollowing,
         like,

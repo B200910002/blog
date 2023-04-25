@@ -2,10 +2,10 @@ import React, { useContext, useState } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 import { Fonts } from "../constants/styles";
 import { StoryContext } from "../context/StoryContext";
-// import { UserContext } from "../context/UserContext";
+import { UserContext } from "../context/UserContext";
 
 export default function Story(props) {
-  const { createStory } = useContext(StoryContext);
+  const { createStory } = useContext(UserContext);
   const [title, setTitle] = useState("");
   const [contents, setContents] = useState([]);
   const handleSubmit = async (event) => {
@@ -35,6 +35,7 @@ export default function Story(props) {
               placeholder="Title"
               value={title}
               onChange={(event) => setTitle(event.target.value)}
+              required
             />
           </Form.Group>
 
@@ -48,7 +49,8 @@ export default function Story(props) {
               onChange={(event) =>
                 setContents([{ subTitle: "", texts: [event.target.value] }])
               }
-              style={{ height: 500 }}
+              style={{ height: 200 }}
+              required
             />
           </Form.Group>
         </Modal.Body>

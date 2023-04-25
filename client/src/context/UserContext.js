@@ -138,12 +138,15 @@ export function UserProvider(props) {
   };
 
   const createStory = async (title, contents) => {
-    console.log("story", title, contents);
     try {
-      const response = await axios.post(ADD_STORY, {
-        title: title,
-        contents: contents,
-      });
+      const response = await axios.post(
+        ADD_STORY,
+        {
+          title: title,
+          contents: contents,
+        },
+        CONFiG
+      );
       console.log("story", title, contents);
       return response.data;
     } catch (e) {
@@ -181,7 +184,7 @@ export function UserProvider(props) {
         getStories,
         createStory,
         clicked,
-        click
+        click,
       }}
     >
       {props.children}
