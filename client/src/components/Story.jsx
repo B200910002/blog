@@ -1,7 +1,6 @@
 import React, { useContext, useState } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 import { Fonts } from "../constants/styles";
-import { StoryContext } from "../context/StoryContext";
 import { UserContext } from "../context/UserContext";
 
 export default function Story(props) {

@@ -1,8 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Modal, Button, Form, Col, Row, Image } from "react-bootstrap";
+import { Button, Form, Col, Row, Image } from "react-bootstrap";
 import { StoryContext } from "../../context/StoryContext";
 import { Fonts } from "../../constants/styles";
-// import { UserContext } from "../context/UserContext";
 
 export default function Comment(props) {
   const { comment, getComments, selectStory } = useContext(StoryContext);
