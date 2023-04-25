@@ -37,7 +37,7 @@ function ProfileConsumer() {
   const [changePassModalShow, setChangePassModalShow] = useState(false);
   let editModalClose = () => setEditModalShow(false);
   let changePassModalClose = () => setChangePassModalShow(false);
-  
+
   return (
     <UserContext.Consumer>
       {(context) =>

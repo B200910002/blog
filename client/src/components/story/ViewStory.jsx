@@ -5,7 +5,7 @@ import { Row, Col } from "react-bootstrap";
 import Comment from "./Comment";
 
 export default function ViewStory() {
-  const { getStories, email, like } = useContext(UserContext);
+  const { getStories, email, name, like } = useContext(UserContext);
   const [stories, setStories] = useState([]);
   const [selectStory, setSelectStory] = useState({});
   const [commentModalShow, setCommentModalShow] = useState(false);
@@ -26,6 +26,7 @@ export default function ViewStory() {
         onHide={commentModalClose}
         story={selectStory}
       />
+      <p style={Fonts.normalDarkBold}>{name}'s stories</p>
       {stories.map((story, index) => (
         <div
           key={index}
