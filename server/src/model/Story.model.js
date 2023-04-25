@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const storySchema = new Schema({
   user: {
-    type: Schema.Types.ObjectId,
+    type: Object,
     required: true,
   },
   title: {
@@ -16,7 +16,7 @@ const storySchema = new Schema({
     required: true,
   },
   likes: Object,
-  comments: [Schema.Types.ObjectId],
+  comments: [Object],
 });
 
 storySchema.statics.createStory = async function (
@@ -28,10 +28,10 @@ storySchema.statics.createStory = async function (
 ) {
   const story = await this.create({
     user: user,
-    title: title, 
+    title: title,
     contents: contents,
     date: date,
-    likes: likes
+    likes: likes,
   });
 
   return story;

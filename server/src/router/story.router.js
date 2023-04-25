@@ -13,7 +13,7 @@ router.get("/get-from-following", userCtrl.protect, storyCtrl.getStoriesFromFoll
 
 //post
 router.post("/create-story", userCtrl.protect, storyCtrl.createStory);
-// router.post("/create-story", storyCtrl.createStory);
+router.post("/:storyId/like", userCtrl.protect, storyCtrl.like);
 router.post("/:storyId/create-comment", userCtrl.protect, commentCtrl.createComment);
 router.post("/:commentId/create-reply", userCtrl.protect, commentCtrl.createReply);
 

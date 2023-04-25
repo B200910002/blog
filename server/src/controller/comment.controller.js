@@ -1,5 +1,6 @@
 const { Comment } = require("../model/Comment.model");
 const { Story } = require("../model/Story.model");
+const { User } = require("../model/User.model");
 
 exports.getComments = async (req, res, next) => {
   try {
@@ -7,7 +8,10 @@ exports.getComments = async (req, res, next) => {
     const story = await Story.findById(storyId);
     const comments = [];
     for (com of story.comments) {
-      comments.push(await Comment.findById(com));
+      const comment = await Comment.findById(com);
+      const user = await User.findById(comment.user);
+      comment.user = { email: user.email, name: user.name, photo: user.photo };
+      comments.push(comment);
     }
     res.status(200).json(comments);
   } catch (e) {

@@ -11,7 +11,7 @@ export const USER_FOLLOWING_URL = `${BASE_URL}/user/get-following`;
 export const EDIT_USER_URL = `${BASE_URL}/user/edit-user`;
 export const FOLLOW_URL = `${BASE_URL}/user/follow`;
 export const UNFOLLOW_URL = `${BASE_URL}/user/unfollow`;
-
+export const STORY_FROM_FOLLOWING = `${BASE_URL}/story/get-from-following`;
 export const ADD_STORY = `${BASE_URL}/story/create-story`;
 
 export const CHANGE_PASSWORD_URL = `${BASE_URL}/user/change-password`;

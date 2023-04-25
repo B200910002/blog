@@ -104,10 +104,39 @@ exports.getStoriesFromFollowing = async (req, res, next) => {
     for (let u of following.users) {
       const st = await Story.find({ user: u });
       for (let s of st) {
+        for (let content of s.contents) {
+          const con = await Content.findById(content);
+          s.contents = con;
+        }
+        const dd = await User.findById(s.user);
+        s.user = { email: dd.email, name: dd.name, photo: dd.photo };
+        const likers = await UserGroup.findById(s.likes);
+        s.likes = likers.users;
         stories.push(s);
       }
     }
     res.status(200).json(stories);
+  } catch (e) {
+    res.status(400).json({ error: e.message });
+  }
+};
+
+exports.like = async (req, res, next) => {
+  try {
+    const user = req.user;
+    const { storyId } = req.params;
+    const story = await Story.findById(storyId);
+    if (!story) throw new Error("not found the story");
+    const likers = await UserGroup.findById(story.likes);
+    if (!likers) throw new Error("not found usergroup likers");
+    const alreadyLiked = await likers.users.find(function (element) {
+      return element + "" === user._id + "";
+    });
+    if (alreadyLiked) throw new Error("you already liked");
+    likers.users.push(user._id);
+    likers.save();
+    story.likes = likers.users;
+    res.status(200).json(story.likes);
   } catch (e) {
     res.status(400).json({ error: e.message });
   }

@@ -59,7 +59,7 @@ function ProfileConsumer() {
               <></>
             )}
             <Row>
-              <Col sm={8} style={{ overflowY: "scroll" }}>
+              <Col sm={8} style={{ overflowY: "scroll", height: "500px" }}>
                 <Outlet />
               </Col>
               <Col sm={4}>

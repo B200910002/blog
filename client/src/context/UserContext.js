@@ -181,7 +181,7 @@ export function UserProvider(props) {
         getStories,
         createStory,
         clicked,
-        click,
+        click
       }}
     >
       {props.children}
