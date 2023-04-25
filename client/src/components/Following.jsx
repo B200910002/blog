@@ -23,7 +23,7 @@ function Following(props) {
     };
 
     refreshData();
-  }, [clicked, props.params.email]);
+  }, [getFollowing, clicked, props.params.email]);
 
   return (
     <>

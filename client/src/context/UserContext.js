@@ -25,6 +25,7 @@ export function UserProvider(props) {
   const [followers, setFollower] = useState([]);
   const [following, setFollowing] = useState([]);
   const [clicked, setClicked] = useState(false);
+
   var click = () => (clicked === false ? setClicked(true) : setClicked(false));
 
   useEffect(() => {

@@ -16,7 +16,7 @@ exports.getStories = async (req, res, next) => {
       }
       story.contents = contents;
       const likes = await UserGroup.findById(story.likes);
-      story.likes = likes.users
+      story.likes = likes.users;
     }
     res.status(200).json(stories);
   } catch (e) {
@@ -48,13 +48,13 @@ exports.createStory = async (req, res, next) => {
       });
       conts.push(content._id);
     }
-    const likes = await UserGroup.create({})
+    const likes = await UserGroup.create({});
     const stories = await Story.create({
       user: req.user._id,
       title: title,
       contents: conts,
       date: Date.now(),
-      likes: likes._id
+      likes: likes._id,
     });
 
     res.status(200).json(stories);
@@ -91,6 +91,23 @@ exports.deleteStory = async (req, res, next) => {
     }
     story.remove();
     res.status(200).json("Story deleted");
+  } catch (e) {
+    res.status(400).json({ error: e.message });
+  }
+};
+
+exports.getStoriesFromFollowing = async (req, res, next) => {
+  try {
+    const user = req.user;
+    const following = await UserGroup.findById(user.following);
+    const stories = [];
+    for (let u of following.users) {
+      const st = await Story.find({ user: u });
+      for (let s of st) {
+        stories.push(s);
+      }
+    }
+    res.status(200).json(stories);
   } catch (e) {
     res.status(400).json({ error: e.message });
   }

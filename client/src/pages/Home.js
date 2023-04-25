@@ -4,6 +4,7 @@ import { Fonts } from "../constants/styles";
 import Story from "../components/Story";
 import { Button } from "react-bootstrap";
 import { StoryContext, StoryProvider } from "../context/StoryContext";
+import StoryFromFollowing from "../components/story/StorysFromFollowing";
 
 export default function Home() {
   return (
@@ -28,6 +29,10 @@ function HomeConsumer() {
               <Button onClick={() => setAddStoryModalShow(true)}>
                 Add story
               </Button>
+            </section>
+
+            <section>
+              <StoryFromFollowing />
             </section>
           </div>
         </>

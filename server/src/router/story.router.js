@@ -6,9 +6,10 @@ const commentCtrl = require("../controller/comment.controller");
 
 //get
 router.get("/get-all/:email", storyCtrl.getStories);
-router.get("/:storyId", storyCtrl.getByIdStory);
-router.get("/:storyId/comments", commentCtrl.getComments);
-router.get("/:commentId/replys", commentCtrl.getReplys);
+router.get("/get-by-id/:storyId", storyCtrl.getByIdStory);
+router.get("/get-comments/:storyId/comments", commentCtrl.getComments);
+router.get("/get-comment-reply/:commentId/replys", commentCtrl.getReplys);
+router.get("/get-from-following", userCtrl.protect, storyCtrl.getStoriesFromFollowing)
 
 //post
 router.post("/create-story", userCtrl.protect, storyCtrl.createStory);
