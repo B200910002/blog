@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import axios from "axios";
 import {
   ADD_STORY,
@@ -10,7 +10,24 @@ import {
 export const StoryContext = createContext({});
 
 export function StoryProvider(props) {
+  const [stories, setStories] = useState([]);
   const [selectStory, setSelectStory] = useState({});
+  const [clicked, setClicked] = useState(false);
+  var click = () => (clicked === false ? setClicked(true) : setClicked(false));
+  useEffect(() => {
+    const getStoriesFromFollowing = async () => {
+      await axios
+        .get(STORY_FROM_FOLLOWING, CONFiG)
+        .then((response) => {
+          setStories(response.data);
+        })
+        .catch((e) => {
+          console.log(e.response.data.error);
+        });
+    };
+    getStoriesFromFollowing();
+  }, [clicked]);
+
   const createStory = async (title, contents) => {
     try {
       const response = await axios.post(
@@ -28,12 +45,14 @@ export function StoryProvider(props) {
       return e.response.data;
     }
   };
-  const getStoriesFromFollowing = async () => {
-    try {
-      const response = await axios.get(STORY_FROM_FOLLOWING, CONFiG);
-      return response;
-    } catch (e) {
-      console.log(e.response.data.error);
+  const deleteStory = async (storyId) => {
+    if (window.confirm("Are you sure delete story?")) {
+      await axios
+        .delete(`${BASE_URL}/story/delete-story/${storyId}`, CONFiG)
+        .then((response) => {})
+        .catch((error) => {
+          console.log(error.response.data.error);
+        });
     }
   };
   const like = async (storyId) => {
@@ -67,16 +86,32 @@ export function StoryProvider(props) {
       `${BASE_URL}/story/get-comments/${storyId}/comments`
     );
   };
+  const deleteComment = async (storyId, commentId) => {
+    if (window.confirm("Are you sure delete comment?")) {
+      await axios
+        .delete(
+          `${BASE_URL}/story/${storyId}/delete-comment/${commentId}`,
+          CONFiG
+        )
+        .then((response) => {})
+        .catch((error) => {
+          console.log(error.response.data.error);
+        });
+    }
+  };
   return (
     <StoryContext.Provider
       value={{
+        stories,
         selectStory,
         setSelectStory,
         createStory,
-        getStoriesFromFollowing,
         like,
         comment,
         getComments,
+        deleteStory,
+        deleteComment,
+        click,
       }}
     >
       {props.children}

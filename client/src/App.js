@@ -9,6 +9,7 @@ import {
 
 import { Containers } from "./constants/styles";
 import { AuthProvider, AuthContext } from "./context/AuthContext";
+import { StoryProvider } from "./context/StoryContext";
 
 import Auth from "./authentication/Auth";
 import Login from "./authentication/Login";
@@ -75,7 +76,9 @@ const Layout = () => {
           <Header />
           <div style={Containers.main}>
             <Suspense fallback={<h1>Loading...</h1>}>
-              <Outlet />
+                <StoryProvider>
+                  <Outlet />
+                </StoryProvider>
             </Suspense>
           </div>
           <Footer />

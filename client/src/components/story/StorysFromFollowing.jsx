@@ -1,22 +1,14 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { StoryContext } from "../../context/StoryContext";
 import { Fonts } from "../../constants/styles";
 import { Image, Row, Col } from "react-bootstrap";
 import Comment from "./Comment";
 
 export default function StoryFromFollowing() {
-  const { getStoriesFromFollowing, like, selectStory, setSelectStory } =
+  const { stories, like, selectStory, setSelectStory } =
     useContext(StoryContext);
-  const [stories, setStories] = useState([]);
   const [commentModalShow, setCommentModalShow] = useState(false);
   let commentModalClose = () => setCommentModalShow(false);
-  useEffect(() => {
-    const refreshData = async () => {
-      const s = await getStoriesFromFollowing();
-      setStories(s.data);
-    };
-    refreshData();
-  }, [getStoriesFromFollowing]);
 
   return (
     <div className="mt-3">
@@ -65,12 +57,12 @@ export default function StoryFromFollowing() {
                   setSelectStory(story);
                 }}
               >
-                Comment
+                Comments
               </button>{" "}
               {story.comments.length}
             </Col>
             <Col>
-              <button>Share </button> {123}
+              <button>Shares </button> {123}
             </Col>
           </Row>
         </div>

@@ -1,11 +1,14 @@
 import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../context/UserContext";
+import { StoryContext } from "../../context/StoryContext";
 import { Fonts } from "../../constants/styles";
 import { Row, Col } from "react-bootstrap";
 import Comment from "./Comment";
+import { AiFillEdit, AiFillDelete } from "react-icons/ai";
 
 export default function ViewStory() {
-  const { getStories, email, name, like } = useContext(UserContext);
+  const { getStories, email, name } = useContext(UserContext);
+  const { like, deleteStory } = useContext(StoryContext);
   const [stories, setStories] = useState([]);
   const [selectStory, setSelectStory] = useState({});
   const [commentModalShow, setCommentModalShow] = useState(false);
@@ -32,12 +35,25 @@ export default function ViewStory() {
           key={index}
           className="container border border-secondary rounded mb-3 p-0"
         >
-          <Row className="border-bottom bg-light rounded-top m-0 pt-2">
-            <Col sm={7}>
+          <Row className="border-bottom bg-light rounded-top m-0 p-2">
+            <Col sm={10}>
               <p style={Fonts.smallGray}>
                 {"·"}
                 {new Date(story.date).toUTCString()}
               </p>
+            </Col>
+            <Col sm={2}>
+              <button className="btn btn-warning" onClick={() => {}}>
+                <AiFillEdit />
+              </button>{" "}
+              <button
+                className="btn btn-danger"
+                onClick={() => {
+                  deleteStory(story._id);
+                }}
+              >
+                <AiFillDelete />
+              </button>
             </Col>
           </Row>
 

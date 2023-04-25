@@ -5,13 +5,15 @@ import { Fonts } from "../../constants/styles";
 // import { UserContext } from "../context/UserContext";
 
 export default function Comment(props) {
-  const { comment, getComments } = useContext(StoryContext);
+  const { comment, getComments, deleteComment, click } =
+    useContext(StoryContext);
   const [comments, setComments] = useState([]);
   const [text, setText] = useState("");
   //   const [photo, setPhoto] = useState("");
   const handleSubmit = async (event) => {
     event.preventDefault();
     await comment(props.story._id, text);
+    click();
   };
 
   useEffect(() => {
@@ -57,7 +59,17 @@ export default function Comment(props) {
                       {new Date(comment.date).toUTCString()}
                     </p>
                   </Col>
-                  <Col></Col>
+                  <Col>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        deleteComment(props.story._id, comment._id);
+                        click();
+                      }}
+                    >
+                      delete
+                    </button>
+                  </Col>
                 </Row>
                 <div className="container">
                   <p>{comment.text}</p>
