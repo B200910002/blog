@@ -7,8 +7,8 @@ import { AuthContext } from "../context/AuthContext";
 export default function Header() {
   const { logout, user } = useContext(AuthContext);
   return (
-    <header style={Containers.main}>
-      <Nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top px-5 py-0">
+    <header style={Containers.header}>
+      <Nav className="navbar navbar-expand-lg navbar-light bg-white fixed-top px-5 py-0">
         <Navbar className="me-auto p-0">
           <NavItem className="nav-item">
             <Link className="nav-link" to="/">
@@ -23,11 +23,11 @@ export default function Header() {
         </Navbar>
         <Navbar className="p-0">
           <NavItem>
-            {/* <Link className="nav-link" to={user.email}> */}
-            <a className="nav-link" href={"/" + user.email}>
+            <Link className="nav-link" to={user.email}>
+              {/* <a className="nav-link" href={"/" + user.email}> */}
               {user.email}
-            </a>
-            {/* </Link> */}
+              {/* </a> */}
+            </Link>
           </NavItem>
           <NavItem>
             <Link onClick={() => logout()}>Logout</Link>

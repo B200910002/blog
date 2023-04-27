@@ -11,11 +11,11 @@ export const Colors = {
 
 export const Containers = {
   header: {
-    padding: "15px 5%",
+    padding: "20px 5%",
   },
   main: {
     padding: "15px 5%",
-    backgroundColor: Colors.whiteColor,
+    backgroundColor: Colors.white,
   },
 };
 

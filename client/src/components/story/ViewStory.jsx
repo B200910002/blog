@@ -33,7 +33,7 @@ export default function ViewStory() {
       {stories.map((story, index) => (
         <div
           key={index}
-          className="container border border-secondary rounded mb-3 p-0"
+          className="container border rounded mb-3 p-0"
         >
           <Row className="border-bottom bg-light rounded-top m-0 p-2">
             <Col sm={10}>

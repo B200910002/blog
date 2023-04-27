@@ -4,6 +4,7 @@ import { Row, Col } from "react-bootstrap";
 import { StoryContext, StoryProvider } from "../context/StoryContext";
 import StoryFromFollowing from "../components/story/StorysFromFollowing";
 import Comments from "../components/story/Comments";
+import Footer from "../components/Footer"
 
 export default function Home() {
   return (
@@ -28,6 +29,7 @@ function HomeConsumer() {
             </Col>
             <Col sm={4}>
               <Comments />
+              <Footer />
             </Col>
           </Row>
         </>

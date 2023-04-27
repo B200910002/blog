@@ -26,7 +26,7 @@ export default function Comment(props) {
       <p style={Fonts.normalDarkBold}>Comments {comments.length}</p>
       <hr style={{ marginBottom: 0 }} />
       <Row>
-        <Col style={{ overflowY: "scroll", height: "400px" }}>
+        <Col style={{ overflowY: "scroll", height: "250px" }}>
           {comments.map((comment, index) => (
             <div key={index} className="border border-secondary rounded m-2">
               <Row className="border-bottom bg-light rounded-top m-0 pt-2">
