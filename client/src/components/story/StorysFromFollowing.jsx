@@ -18,10 +18,7 @@ export default function StoryFromFollowing() {
         story={selectStory}
       />
       {stories.map((story, index) => (
-        <div
-          key={index}
-          className="container border border-secondary rounded mb-3 p-0"
-        >
+        <div key={index} className="container border rounded mb-3 p-0">
           <Row className="border-bottom bg-light rounded-top m-0 p-2">
             <Col sm={1}>
               <a href={story.user.email}>
@@ -32,7 +29,9 @@ export default function StoryFromFollowing() {
               </a>
             </Col>
             <Col sm={7}>
-              <a href={story.user.email}>{story.user.name}</a>
+              <a href={story.user.email} style={Fonts.smallDarkBold}>
+                {story.user.name}
+              </a>
               <p style={Fonts.smallGray}>
                 {"·"}
                 {new Date(story.date).toUTCString()}
@@ -47,11 +46,17 @@ export default function StoryFromFollowing() {
 
           <Row className="border-top bg-light rounded-bottom m-0 p-2">
             <Col>
-              <button onClick={() => like(story._id)}>Like</button>{" "}
+              <button
+                className="btn shadow-none"
+                onClick={() => like(story._id)}
+              >
+                Like
+              </button>{" "}
               {story.likes.length}
             </Col>
             <Col>
               <button
+                className="btn shadow-none"
                 onClick={() => {
                   setCommentModalShow(true);
                   setSelectStory(story);
@@ -60,9 +65,6 @@ export default function StoryFromFollowing() {
                 Comments
               </button>{" "}
               {story.comments.length}
-            </Col>
-            <Col>
-              <button>Shares </button> {123}
             </Col>
           </Row>
         </div>

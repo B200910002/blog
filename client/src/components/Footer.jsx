@@ -3,7 +3,7 @@ import { Container, Row, Col } from "react-bootstrap";
 
 function Footer() {
   return (
-    <footer className="bg-light py-3">
+    <footer className="py-3">
       <Container>
         <Row>
           <Col sm={8}>

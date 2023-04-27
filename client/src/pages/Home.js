@@ -19,7 +19,7 @@ function HomeConsumer() {
       {(context) => (
         <>
           <Row>
-            <Col sm={8} style={{ overflowY: "scroll", height: "500px" }}>
+            <Col sm={8} style={{ overflowY: "scroll", height: "600px" }}>
               <div>
                 <section>
                   <StoryFromFollowing />

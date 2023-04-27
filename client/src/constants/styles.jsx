@@ -1,18 +1,22 @@
-export const Containers = {
-  main: {
-    padding: "15px 5%",
-  },
-};
-
 export const Colors = {
-  headerBackColor: "#1B1F2B",
-  mainContainerBackColor: "#11141D",
-  footerBackColor: "#171A23",
-  containerBackColor: "#212633",
   blackColor: "#000000",
   grayColor: "#c5cde7",
   whiteColor: "#ffffff",
   darkColor: "#1E1E1E",
+  blue: "#213159",
+  red: "#f04b4c",
+  lightBlue: "#3d6098",
+  light: "#e7e7e7",
+};
+
+export const Containers = {
+  header: {
+    padding: "15px 5%",
+  },
+  main: {
+    padding: "15px 5%",
+    backgroundColor: Colors.whiteColor,
+  },
 };
 
 export const Sizes = {
@@ -178,5 +182,14 @@ export const Fonts = {
     fontSize: Sizes.largeSize,
     fontFamily: FontFamily.roboto,
     fontStyle: "italic",
+  },
+};
+
+export const Buttons = {
+  btn1: {
+    backgroundColor: Colors.blue,
+  },
+  bt2: {
+    backgroundColor: Colors.red,
   },
 };
