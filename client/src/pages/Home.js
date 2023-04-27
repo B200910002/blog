@@ -29,8 +29,8 @@ function HomeConsumer() {
             </Col>
             <Col sm={4}>
               <Comments />
-              <Footer />
             </Col>
+            <Footer />
           </Row>
         </>
       )}

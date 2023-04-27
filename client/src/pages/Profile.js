@@ -95,7 +95,10 @@ function ProfileConsumer() {
                     <Button onClick={() => setChangePassModalShow(true)}>
                       Change Password
                     </Button>{" "}
-                    <Button onClick={() => setAddStoryModalShow(true)}>
+                    <Button 
+                    variant="secondary"
+                    style={{backgroundColor: "#1a8917", borderColor: "#1a8917"}}
+                    onClick={() => setAddStoryModalShow(true)}>
                       Add story
                     </Button>
                   </>

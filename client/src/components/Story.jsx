@@ -21,7 +21,7 @@ export default function Story(props) {
       <Form onSubmit={handleSubmit}>
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
-            Story Bichih
+            Write Story
           </Modal.Title>
         </Modal.Header>
 
@@ -55,7 +55,9 @@ export default function Story(props) {
         </Modal.Body>
 
         <Modal.Footer>
-          <Button variant="primary" type="submit" onClick={props.onHide}>
+          <Button
+            style={{ backgroundColor: "#1a8917", borderColor: "#1a8917" }}
+            variant="secondary" type="submit" onClick={props.onHide}>
             Publish
           </Button>
         </Modal.Footer>

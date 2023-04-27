@@ -10,10 +10,20 @@ function Footer() {
             <p className="text-center">
               Copyright &copy; {new Date().getFullYear()}
             </p>
-            <p>Б.Өлзиймаа /B200910009/</p>
-            <p>Б.Жамц /B200910002/</p>
-            <p>Б.Мөнх-Очир /B200910045/</p>
-            <p>Э.Өнөболд /B200910028/</p>
+            <Row>
+              <Col className="col-3">
+                Б.Мөнх-Очир /B200910045/
+              </Col>
+              <Col className="col-3">
+                Б.Өлзиймаа /B200910009/
+              </Col>
+              <Col className="col-3">
+                Б.Жамц /B200910002/
+              </Col>
+              <Col className="col-3">
+                Э.Өнөболд /B200910028/
+              </Col>
+            </Row>
           </Col>
         </Row>
       </Container>

@@ -4,7 +4,7 @@ import { StoryContext } from "../../context/StoryContext";
 import { Fonts } from "../../constants/styles";
 import { Row, Col } from "react-bootstrap";
 import Comment from "./Comment";
-import { AiFillEdit, AiFillDelete } from "react-icons/ai";
+import { AiFillEdit, AiFillDelete, AiFillLike } from "react-icons/ai";
 
 export default function ViewStory() {
   const { getStories, email, name } = useContext(UserContext);
@@ -33,19 +33,19 @@ export default function ViewStory() {
       {stories.map((story, index) => (
         <div
           key={index}
-          className="container border rounded mb-3 p-0"
+          className="container border border-secondary rounded mb-3 p-0"
         >
           <Row className="border-bottom bg-light rounded-top m-0 p-2">
-            <Col sm={10}>
+            <Col sm={11}>
               <p style={Fonts.smallGray}>
                 {"·"}
                 {new Date(story.date).toUTCString()}
               </p>
             </Col>
-            <Col sm={2}>
-              <button className="btn btn-warning" onClick={() => { }}>
+            <Col sm={1}>
+              {/* <button className="btn btn-warning" onClick={() => { }}>
                 <AiFillEdit />
-              </button>{" "}
+              </button>{" "} */}
               <button
                 className="btn btn-danger"
                 onClick={() => {
@@ -63,17 +63,18 @@ export default function ViewStory() {
           </div>
 
           <Row className="border-top bg-light rounded-bottom m-0 p-2">
-            <Col>
+            <Col className="">
               <button
                 className="btn btn-primary"
                 onClick={() => like(story._id)}>
-                Like
+                <AiFillLike />
                 {" " + story.likes.length}
               </button>
             </Col>
-            <Col>
+            <Col className="col-2">
               <button
-                className="btn btn-warning"
+                className="btn btn-light"
+                style={{ backgroundColor: "#fff", borderColor: "#000" }}
                 onClick={() => {
                   setCommentModalShow(true);
                   setSelectStory(story);

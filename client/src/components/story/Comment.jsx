@@ -51,8 +51,10 @@ export default function Comment(props) {
                     </a>
                   </Col>
                   <Col sm={6}>
-                    <a href={comment.user.email}>
-                      <p style={{ margin: "0" }}>{comment.user.name}</p>
+                    <a
+                      href={comment.user.email}>
+                      <p
+                        style={{ margin: "0" }}>{comment.user.name}</p>
                     </a>{" "}
                     <p style={Fonts.smallGray}>
                       {"·"}
@@ -61,6 +63,7 @@ export default function Comment(props) {
                   </Col>
                   <Col>
                     <button
+                      className="btn btn-light text-danger"
                       type="button"
                       onClick={() => {
                         deleteComment(props.story._id, comment._id);
@@ -75,7 +78,6 @@ export default function Comment(props) {
                   <p>{comment.text}</p>
                 </div>
                 <Row className="border-top bg-light rounded-bottom m-0 p-2">
-                  <Col>Replys</Col>
                 </Row>
               </div>
             ))}
@@ -83,8 +85,8 @@ export default function Comment(props) {
         </Row>
 
         <Modal.Footer>
-          <Row>
-            <Col sm={8}>
+          <Row style={{ width: "100%" }}>
+            <Col sm={10}>
               <Form.Control
                 type="text"
                 name="text"
@@ -93,8 +95,10 @@ export default function Comment(props) {
                 onChange={(event) => setText(event.target.value)}
               />
             </Col>
-            <Col sm={4}>
-              <Button variant="primary" type="submit" onClick={props.onHide}>
+            <Col sm={2}>
+              <Button
+                style={{ backgroundColor: "#1a8917", borderColor: "#1a8917" }}
+                variant="secondary" type="submit" onClick={props.onHide}>
                 Comment
               </Button>
             </Col>
