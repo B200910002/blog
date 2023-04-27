@@ -46,24 +46,35 @@ export default function StoryFromFollowing() {
           </div>
 
           <Row className="border-top bg-light rounded-bottom m-0 p-2">
-            <Col>
-              <button onClick={() => like(story._id)}>Like</button>{" "}
-              {story.likes.length}
-            </Col>
-            <Col>
+            <div className="row">
+              <Col className="col-2">
+                <button
+                  className="btn btn-primary"
+                  onClick={() => like(story._id)}>
+                  Like
+                  {" " + story.likes.length}
+                </button>
+              </Col>
+              <Col className="col-2">
+                <button
+                  className="btn btn-warning"
+                  onClick={() => {
+                    setCommentModalShow(true);
+                    setSelectStory(story);
+                  }}
+                >
+                  Comment
+                  {" " + story.comments.length}
+                </button>
+              </Col>
+              {/* <Col>
               <button
-                onClick={() => {
-                  setCommentModalShow(true);
-                  setSelectStory(story);
-                }}
-              >
-                Comments
-              </button>{" "}
-              {story.comments.length}
-            </Col>
-            <Col>
-              <button>Shares </button> {123}
-            </Col>
+                className="btn btn-secondary"
+              >Share
+                {" " + 1}
+              </button>
+            </Col> */}
+            </div>
           </Row>
         </div>
       ))}

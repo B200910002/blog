@@ -55,11 +55,15 @@ function Following(props) {
                   ) : (
                     <>
                       {follower.isFollowing ? (
-                        <Button onClick={() => unfollow(follower.email)}>
+                        <Button 
+                        className="btn btn-danger"
+                        onClick={() => unfollow(follower.email)}>
                           Unfollow
                         </Button>
                       ) : (
-                        <Button onClick={() => follow(follower.email)}>
+                        <Button 
+                        className="btn btn-primary"
+                        onClick={() => follow(follower.email)}>
                           Follow
                         </Button>
                       )}

@@ -43,7 +43,7 @@ export default function ViewStory() {
               </p>
             </Col>
             <Col sm={2}>
-              <button className="btn btn-warning" onClick={() => {}}>
+              <button className="btn btn-warning" onClick={() => { }}>
                 <AiFillEdit />
               </button>{" "}
               <button
@@ -64,23 +64,32 @@ export default function ViewStory() {
 
           <Row className="border-top bg-light rounded-bottom m-0 p-2">
             <Col>
-              <button onClick={() => like(story._id)}>Like</button>{" "}
-              {story.likes.length}
+              <button
+                className="btn btn-primary"
+                onClick={() => like(story._id)}>
+                Like
+                {" " + story.likes.length}
+              </button>
             </Col>
             <Col>
               <button
+                className="btn btn-warning"
                 onClick={() => {
                   setCommentModalShow(true);
                   setSelectStory(story);
                 }}
               >
                 Comment
-              </button>{" "}
-              {story.comments.length}
+                {" " + story.comments.length}
+              </button>
             </Col>
-            <Col>
-              <button>Share </button> {123}
-            </Col>
+            {/* <Col>
+              <button
+                className="btn btn-secondary"
+              >Share
+                {" " + 1}
+              </button>
+            </Col> */}
           </Row>
         </div>
       ))}
