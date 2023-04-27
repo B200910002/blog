@@ -1,4 +1,4 @@
-import React, { useContext, Suspense } from "react";
+import React, { useContext } from "react";
 import {
   BrowserRouter,
   Routes,
@@ -7,7 +7,6 @@ import {
   Navigate,
 } from "react-router-dom";
 
-import { Containers } from "./constants/styles";
 import { AuthProvider, AuthContext } from "./context/AuthContext";
 import { StoryProvider } from "./context/StoryContext";
 
@@ -20,21 +19,11 @@ import Contact from "./pages/Contact";
 import NoPage from "./pages/NoPage";
 
 import Header from "./components/Header";
-import Footer from "./components/Footer";
+// import Footer from "./components/Footer";
 import EmailVerify from "./components/EmailVerify";
 import Followers from "./components/Followers";
 import Following from "./components/Following";
 import ViewStory from "./components/story/ViewStory";
-
-// const Auth = lazy(() => wait(1000).then(() => import("./pages/Auth")));
-// const Login = lazy(() => wait(1000).then(() => import("./pages/Login")));
-// const Register = lazy(() => wait(1000).then(() => import("./pages/Register")));
-// const Profile = lazy(() => wait(1000).then(() => import("./pages/Profile")));
-// const Home = lazy(() => wait(1000).then(() => import("./pages/Home")));
-// const Contact = lazy(() => wait(1000).then(() => import("./pages/Contact")));
-// const NoPage = lazy(() => wait(1000).then(() => import("./pages/NoPage")));
-// const Header = lazy(() => wait(1000).then(() => import("./components/Header")));
-// const Footer = lazy(() => wait(1000).then(() => import("./components/Footer")));
 
 export default function App() {
   return (
@@ -74,14 +63,12 @@ const Layout = () => {
       {user && isAuthenticated ? (
         <>
           <Header />
-          <div style={Containers.main}>
-            <Suspense fallback={<h1>Loading...</h1>}>
-                <StoryProvider>
-                  <Outlet />
-                </StoryProvider>
-            </Suspense>
+          <hr style={{ margin: 0 }} />
+          <div style={{ margin: "0 5%" }}>
+            <StoryProvider>
+              <Outlet />
+            </StoryProvider>
           </div>
-          <Footer />
         </>
       ) : (
         <Navigate to="/auth/login" />
@@ -89,9 +76,3 @@ const Layout = () => {
     </>
   );
 };
-
-// function wait(time) {
-//   return new Promise((resolve) => {
-//     setTimeout(resolve, time);
-//   });
-// }
