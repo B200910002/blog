@@ -28,7 +28,7 @@ function HomeConsumer() {
               </div>
             </Col>
             <Col sm={4}>
-              <Comments />
+              {/* <Comments /> */}
               <Footer />
             </Col>
           </Row>

@@ -3,11 +3,10 @@ import { Link, Outlet, Navigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 
 export default function Auth() {
-  const { user } = useContext(AuthContext);
-  const isAuth = user ? user.token : undefined;
+  const { isAuthenticated } = useContext(AuthContext);
   return (
     <>
-      {!isAuth ? (
+      {!isAuthenticated ? (
         <div className="login">
           <h2>
             <Link to="login">Login</Link>

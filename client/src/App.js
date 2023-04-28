@@ -27,32 +27,25 @@ import ViewStory from "./components/story/ViewStory";
 
 export default function App() {
   return (
-    <AuthProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/auth" element={<Auth />}>
-            <Route path="login" element={<Login />} />
-            <Route path="register" element={<Register />} />
-            <Route path="login/register" element={<Register />} />
-            <Route path="login/register/login" element={<Login />} />
-          </Route>
-          <Route path="/" element={<Layout />}>
-            <Route index element={<Home />}></Route>
-            <Route path="contact" element={<Contact />}></Route>
-            <Route path=":email" element={<Profile />}>
-              <Route index element={<ViewStory />} />
-              <Route path="followers" element={<Followers />} />
-              <Route path="following" element={<Following />} />
-            </Route>
-          </Route>
-          <Route
-            path="/user/:id/verify/:token"
-            element={<EmailVerify />}
-          ></Route>
-          <Route path="*" element={<NoPage />} />
-        </Routes>
-      </BrowserRouter>
-    </AuthProvider>
+    <Routes>
+      <Route path="/auth" element={<Auth />}>
+        <Route path="login" element={<Login />} />
+        <Route path="register" element={<Register />} />
+        <Route path="login/register" element={<Register />} />
+        <Route path="login/register/login" element={<Login />} />
+      </Route>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<Home />}></Route>
+        <Route path="contact" element={<Contact />}></Route>
+        <Route path=":email" element={<Profile />}>
+          <Route index element={<ViewStory />} />
+          <Route path="followers" element={<Followers />} />
+          <Route path="following" element={<Following />} />
+        </Route>
+      </Route>
+      <Route path="/user/:id/verify/:token" element={<EmailVerify />}></Route>
+      <Route path="*" element={<NoPage />} />
+    </Routes>
   );
 }
 
