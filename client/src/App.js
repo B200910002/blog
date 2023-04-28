@@ -1,13 +1,7 @@
 import React, { useContext } from "react";
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-  Outlet,
-  Navigate,
-} from "react-router-dom";
+import { Routes, Route, Outlet, Navigate } from "react-router-dom";
 
-import { AuthProvider, AuthContext } from "./context/AuthContext";
+import { AuthContext } from "./context/AuthContext";
 import { StoryProvider } from "./context/StoryContext";
 
 import Auth from "./authentication/Auth";
