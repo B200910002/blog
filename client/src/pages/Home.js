@@ -27,9 +27,14 @@ function HomeConsumer() {
               </div>
             </Col>
             <Col sm={4}>
+{/* <<<<<<< HEAD */}
               {/* <Comments /> */}
-              <Footer />
+               {/* <Footer /> */}
+=======
+              {/* <Comments /> */}
+{/* >>>>>>> origin/zmaver1 */}
             </Col>
+            <Footer />
           </Row>
         </>
       )}

@@ -9,7 +9,7 @@ export default function Auth() {
       {!isAuthenticated ? (
         <div className="login">
           <h2>
-            <Link to="login">Login</Link>
+            {/* <Link to="login">Login</Link> */}
             <br />
           </h2>
           <Outlet />

@@ -23,14 +23,17 @@ export default function Comment(props) {
 
   return (
     <Form onSubmit={handleSubmit}>
-      <p style={Fonts.normalDarkBold}>Comments {comments.length}</p>
+      <p style={Fonts.normalDarkBold}>Chat 
+      {/* {comments.length} */}
+      </p>
       <hr style={{ marginBottom: 0 }} />
       <Row>
         <Col style={{ overflowY: "scroll", height: "250px" }}>
           {comments.map((comment, index) => (
-            <div key={index} className="border border-secondary rounded m-2">
+            <div key={index} className="border border-secondary rounded m-2 col-9">
+
               <Row className="border-bottom bg-light rounded-top m-0 pt-2">
-                <Col sm={2}>
+                <Col sm={3}>
                   <a href={comment.user.email}>
                     <Image
                       src={comment.user.photo}
@@ -38,7 +41,7 @@ export default function Comment(props) {
                     />
                   </a>
                 </Col>
-                <Col sm={10}>
+                <Col sm={9}>
                   <a href={comment.user.email}>
                     <p style={{ margin: "0" }}>{comment.user.name}</p>
                   </a>{" "}
@@ -52,9 +55,9 @@ export default function Comment(props) {
               <div className="container">
                 <p>{comment.text}</p>
               </div>
-              <Row className="border-top bg-light rounded-bottom m-0 p-2">
+              {/* <Row className="border-top bg-light rounded-bottom m-0 p-2">
                 <Col>Replys</Col>
-              </Row>
+              </Row> */}
             </div>
           ))}
         </Col>
