@@ -3,7 +3,6 @@ import React from "react";
 import { Row, Col } from "react-bootstrap";
 import { StoryContext, StoryProvider } from "../context/StoryContext";
 import StoryFromFollowing from "../components/story/StorysFromFollowing";
-import Comments from "../components/story/Comments";
 import Footer from "../components/Footer"
 
 export default function Home() {
